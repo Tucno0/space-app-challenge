@@ -109,8 +109,11 @@ export function AirQualityMap({
   }, [center, zoom]);
 
   return (
-    <Card className="overflow-hidden">
-      <div ref={mapRef} style={{ height, width: '100%' }} />
+    <Card className="overflow-hidden py-0 relative z-0">
+      <div
+        ref={mapRef}
+        style={{ height, width: '100%', position: 'relative', zIndex: 1 }}
+      />
     </Card>
   );
 }

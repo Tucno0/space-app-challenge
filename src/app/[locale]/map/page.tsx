@@ -117,6 +117,7 @@ export default function MapPage() {
                 {dict.footer.dataSources}
               </CardTitle>
             </CardHeader>
+
             <CardContent className="flex flex-wrap gap-2">
               <DataSourceBadge source="tempo" />
               <DataSourceBadge source="pandora" />
@@ -141,6 +142,7 @@ export default function MapPage() {
                 {activeStations.length} {dict.sources.stations}
               </CardDescription>
             </CardHeader>
+
             <CardContent className="space-y-2">
               {activeStations.slice(0, 5).map((station) => (
                 <div key={station.id} className="text-xs space-y-1">
