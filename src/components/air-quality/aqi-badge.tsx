@@ -1,9 +1,9 @@
+'use client';
+
 import { AQICategory } from '@/types/air-quality';
-import {
-  getAQICategoryColor,
-  getAQICategoryTextColor,
-} from '@/lib/color-scales';
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { useTranslation } from '@/hooks/use-translation';
 
 interface AQIBadgeProps {
   value: number;
@@ -13,6 +13,37 @@ interface AQIBadgeProps {
   className?: string;
 }
 
+const sizeClasses = {
+  sm: 'text-[10px] px-1.5 py-0.5',
+  md: 'text-xs px-2 py-1',
+  lg: 'text-sm px-3 py-1.5',
+};
+
+const categoryColorClasses: Record<AQICategory, string> = {
+  good: 'bg-aqi-good text-aqi-good-foreground border-aqi-good',
+  moderate: 'bg-aqi-moderate text-aqi-moderate-foreground border-aqi-moderate',
+  'unhealthy-sensitive':
+    'bg-aqi-unhealthy-sensitive text-aqi-unhealthy-sensitive-foreground border-aqi-unhealthy-sensitive',
+  unhealthy:
+    'bg-aqi-unhealthy text-aqi-unhealthy-foreground border-aqi-unhealthy',
+  'very-unhealthy':
+    'bg-aqi-very-unhealthy text-aqi-very-unhealthy-foreground border-aqi-very-unhealthy',
+  hazardous:
+    'bg-aqi-hazardous text-aqi-hazardous-foreground border-aqi-hazardous',
+};
+
+const categoryLabels: Record<
+  AQICategory,
+  keyof typeof import('@/../locales/en.json')['aqi']['categories']
+> = {
+  good: 'good',
+  moderate: 'moderate',
+  'unhealthy-sensitive': 'unhealthySensitive',
+  unhealthy: 'unhealthy',
+  'very-unhealthy': 'veryUnhealthy',
+  hazardous: 'hazardous',
+};
+
 export function AQIBadge({
   value,
   category,
@@ -20,25 +51,20 @@ export function AQIBadge({
   showValue = true,
   className,
 }: AQIBadgeProps) {
-  const backgroundColor = getAQICategoryColor(category);
-  const textColor = getAQICategoryTextColor(category);
-
-  const sizeClasses = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-3 py-1 text-sm',
-    lg: 'px-4 py-1.5 text-base',
-  };
+  const { dictionary: dict } = useTranslation();
+  const label = dict.aqi.categories[categoryLabels[category]];
 
   return (
-    <span
+    <Badge
+      variant="outline"
       className={cn(
-        'inline-flex items-center rounded-full font-semibold',
         sizeClasses[size],
+        categoryColorClasses[category],
+        'font-semibold',
         className
       )}
-      style={{ backgroundColor, color: textColor }}
     >
-      {showValue ? value : category.toUpperCase()}
-    </span>
+      {showValue ? `${value} - ${label}` : label}
+    </Badge>
   );
 }

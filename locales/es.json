@@ -1,0 +1,340 @@
+{
+  "common": {
+    "appName": "AirCast",
+    "loading": "Cargando...",
+    "error": "Error",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "remove": "Eliminar",
+    "add": "Agregar",
+    "edit": "Editar",
+    "delete": "Borrar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "viewAll": "Ver Todo",
+    "viewMore": "Ver Más",
+    "learnMore": "Más Información",
+    "accessData": "Acceder a Datos",
+    "exportData": "Exportar Datos",
+    "comingSoon": "Próximamente",
+    "loadingMap": "Cargando mapa..."
+  },
+  "navigation": {
+    "dashboard": "Panel",
+    "forecast": "Pronóstico",
+    "alerts": "Alertas",
+    "map": "Mapa",
+    "dataSources": "Fuentes de Datos",
+    "settings": "Configuración"
+  },
+  "home": {
+    "title": "Panel de Calidad del Aire",
+    "subtitle": "Monitoreo en tiempo real de la calidad del aire con NASA TEMPO y estaciones terrestres",
+    "pollutantLevels": "Niveles de Contaminantes",
+    "interactiveMap": "Mapa Interactivo",
+    "fullScreenMap": "Mapa Pantalla Completa",
+    "healthRecommendations": "Recomendaciones de Salud",
+    "recentAlerts": "Alertas Recientes",
+    "viewAllAlerts": "Ver Todas las Alertas",
+    "ctaTitle": "¿Cómo está tu Aire?",
+    "ctaDescription": "Obtén pronósticos de calidad del aire y alertas personalizadas adaptadas a tu ubicación y necesidades de salud.",
+    "viewForecast": "Ver Pronóstico",
+    "configureAlerts": "Configurar Alertas"
+  },
+  "stats": {
+    "temperature": "Temperatura",
+    "feelsLike": "Sensación térmica",
+    "windSpeed": "Velocidad del Viento",
+    "humidity": "Humedad",
+    "pressure": "Presión",
+    "comfortable": "Confortable",
+    "normal": "Normal",
+    "swDirection": "Dirección SO"
+  },
+  "forecast": {
+    "title": "Pronóstico de Calidad del Aire",
+    "subtitle": "Pronóstico de 7 Días",
+    "forecastAlert": "Alerta de Pronóstico",
+    "today": "Hoy",
+    "dayForecast": "Pronóstico",
+    "averageAQI": "ICA Promedio",
+    "aqiRange": "Rango de ICA",
+    "minToMax": "Mín a Máx",
+    "primaryPollutant": "Contaminante Principal",
+    "mostSignificant": "Más significativo",
+    "peakHours": "Horas Pico",
+    "highestAQI": "ICA Más Alto",
+    "hourlyForecast": "Pronóstico Detallado de 24 Horas",
+    "hourlyDescription": "ICA, temperatura y humedad durante el día",
+    "hourlyConditions": "Condiciones por Hora",
+    "weekTrend": "Tendencia de ICA de 7 Días",
+    "weekTrendDescription": "ICA diario promedio para la próxima semana"
+  },
+  "alerts": {
+    "title": "Alertas de Calidad del Aire",
+    "subtitle": "Administra tus alertas y preferencias de notificación",
+    "activeAlerts": "Alertas Activas",
+    "settings": "Configuración",
+    "profile": "Perfil",
+    "noAlerts": "Sin Alertas Activas",
+    "noAlertsDescription": "Verás alertas de calidad del aire aquí cuando cambien las condiciones",
+    "pastAlerts": "Alertas Pasadas",
+    "dismissed": "Alerta descartada",
+    "preferencesSaved": "Preferencias de alerta guardadas exitosamente",
+    "profileChanged": "Perfil cambiado a"
+  },
+  "map": {
+    "title": "Mapa Interactivo de Calidad del Aire",
+    "subtitle": "Monitoreo en tiempo real en toda Norteamérica",
+    "legend": "Leyenda del Mapa",
+    "zoom": "Zoom",
+    "layers": "Capas",
+    "stations": "Estaciones",
+    "satellite": "Datos Satelitales"
+  },
+  "sources": {
+    "title": "Fuentes de Datos",
+    "subtitle": "Conoce los instrumentos científicos y redes que impulsan AirCast",
+    "primarySource": "Fuente de Datos Principal",
+    "coverage": "Cobertura",
+    "greaterNorthAmerica": "Norteamérica y más",
+    "temporalResolution": "Resolución Temporal",
+    "hourlyDaylight": "Horaria durante el día",
+    "spatialResolution": "Resolución Espacial",
+    "cityLevel": "~10 km a nivel ciudad",
+    "keyPollutants": "Contaminantes Clave",
+    "orbit": "Órbita",
+    "geostationary": "Geoestacionaria",
+    "launchDate": "Fecha de Lanzamiento",
+    "april2023": "Abril 2023",
+    "groundStations": "Redes de Estaciones Terrestres",
+    "groundDescription": "Las estaciones de monitoreo terrestres proporcionan validación y mediciones complementarias a los datos satelitales.",
+    "stations": "estaciones",
+    "dataFrequency": "Frecuencia de Datos",
+    "totalStations": "Estaciones Totales",
+    "visitWebsite": "Visitar Sitio Web",
+    "methodology": "Procesamiento de Datos y Metodología",
+    "dataIntegration": "Integración de Datos",
+    "dataIntegrationText": "AirCast combina observaciones satelitales de NASA TEMPO con mediciones terrestres de las redes Pandora, TolNet y OpenAQ para proporcionar evaluaciones completas de la calidad del aire.",
+    "qualityAssurance": "Garantía de Calidad",
+    "qualityAssuranceText": "Todos los datos pasan por rigurosos procedimientos de control de calidad. Las recuperaciones satelitales se validan contra mediciones terrestres para garantizar precisión. Se aplican banderas de calidad de datos a todas las observaciones.",
+    "aqiCalculation": "Cálculo del ICA",
+    "aqiCalculationText": "Los valores del Índice de Calidad del Aire se calculan siguiendo los estándares de la EPA utilizando concentraciones medidas de contaminantes clave incluyendo ozono, dióxido de nitrógeno, dióxido de azufre y material particulado.",
+    "forecastModels": "Modelos de Pronóstico",
+    "forecastModelsText": "Los pronósticos se generan utilizando patrones de datos históricos, observaciones actuales y pronósticos meteorológicos. Los modelos de aprendizaje automático ayudan a predecir el transporte y dispersión de la contaminación.",
+    "attribution": "Atribución y Licencias de Datos",
+    "attributionText": "Todas las fuentes de datos utilizadas en AirCast están disponibles públicamente y son de acceso abierto. Agradecemos a:",
+    "attributionList": {
+      "tempo": "Misión NASA TEMPO y el Centro de Datos de Ciencias Atmosféricas",
+      "pandora": "Proyecto NASA Pandora en el Centro de Vuelo Espacial Goddard",
+      "tolnet": "TolNet - Red de Lidar de Ozono Troposférico",
+      "openaq": "OpenAQ y proveedores de datos contribuyentes en todo el mundo",
+      "epa": "EPA de EE.UU. por metodología ICA y guías de salud"
+    }
+  },
+  "settings": {
+    "title": "Configuración",
+    "subtitle": "Administra tus preferencias y configuración de cuenta",
+    "preferences": "Preferencias",
+    "profile": "Perfil",
+    "locations": "Ubicaciones",
+    "data": "Datos",
+    "preferencesSaved": "Preferencias guardadas exitosamente",
+    "profileUpdated": "Perfil actualizado a",
+    "locationAdded": "Ubicación agregada a ubicaciones guardadas",
+    "locationRemoved": "Ubicación eliminada",
+    "dataExportStarted": "Exportación de datos iniciada - ¡esta función estará disponible pronto!",
+    "savedLocations": "Ubicaciones Guardadas",
+    "savedLocationsDescription": "Accede rápidamente a datos de calidad del aire de tus ubicaciones favoritas",
+    "addNewLocation": "Agregar Nueva Ubicación",
+    "yourSavedLocations": "Tus Ubicaciones Guardadas",
+    "accountInfo": "Información de Cuenta",
+    "accountInfoDescription": "Opcional - Inicia sesión para sincronizar entre dispositivos",
+    "name": "Nombre",
+    "nameOptional": "Nombre (Opcional)",
+    "namePlaceholder": "Tu nombre",
+    "email": "Correo Electrónico",
+    "emailOptional": "Correo Electrónico (Opcional)",
+    "emailPlaceholder": "tu.correo@ejemplo.com",
+    "saveAccountInfo": "Guardar Información de Cuenta",
+    "dataManagement": "Gestión de Datos",
+    "dataManagementDescription": "Administra tus datos de calidad del aire y privacidad",
+    "exportYourData": "Exportar tus Datos",
+    "exportDescription": "Descarga todas tus ubicaciones guardadas, preferencias e historial de alertas",
+    "clearLocalData": "Borrar Datos Locales",
+    "clearDataDescription": "Eliminar todos los datos almacenados localmente de este navegador",
+    "clearAllData": "Borrar Todos los Datos",
+    "privacy": "Privacidad",
+    "privacyText": "AirCast respeta tu privacidad. Solo recopilamos datos necesarios para proporcionar información de calidad del aire. Los datos de ubicación solo se usan cuando lo solicitas explícitamente y no se almacenan en nuestros servidores.",
+    "units": "Unidades",
+    "metric": "Métrico",
+    "imperial": "Imperial",
+    "language": "Idioma",
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "dataRefresh": "Intervalo de Actualización de Datos",
+    "showWeatherData": "Mostrar Datos Meteorológicos",
+    "showStationMarkers": "Mostrar Marcadores de Estaciones"
+  },
+  "aqi": {
+    "categories": {
+      "good": "Buena",
+      "moderate": "Moderada",
+      "unhealthySensitive": "Insalubre para Grupos Sensibles",
+      "unhealthy": "Insalubre",
+      "veryUnhealthy": "Muy Insalubre",
+      "hazardous": "Peligrosa"
+    },
+    "index": "Índice de Calidad del Aire",
+    "level": "Nivel",
+    "lastUpdated": "Última actualización"
+  },
+  "pollutants": {
+    "o3": "Ozono",
+    "no2": "Dióxido de Nitrógeno",
+    "so2": "Dióxido de Azufre",
+    "formaldehyde": "Formaldehído",
+    "pm25": "PM2.5",
+    "pm10": "PM10"
+  },
+  "health": {
+    "recommendations": "Recomendaciones de Salud",
+    "whatYouShouldDo": "Lo que Debes Hacer:",
+    "audiences": {
+      "general": "Público General",
+      "sensitive": "Grupos Sensibles",
+      "elderly": "Adultos Mayores",
+      "children": "Niños",
+      "athletes": "Atletas"
+    },
+    "messages": {
+      "good": {
+        "general": "La calidad del aire es satisfactoria y la contaminación del aire representa poco o ningún riesgo.",
+        "sensitive": "Disfruta de tus actividades al aire libre.",
+        "elderly": "Es seguro pasar tiempo al aire libre.",
+        "children": "Gran día para juegos y actividades al aire libre.",
+        "athletes": "Condiciones perfectas para ejercicio y entrenamiento al aire libre."
+      },
+      "moderate": {
+        "general": "La calidad del aire es aceptable. Sin embargo, puede haber un riesgo para algunas personas, particularmente aquellas que son inusualmente sensibles a la contaminación del aire.",
+        "sensitive": "Considera reducir el esfuerzo prolongado o pesado al aire libre.",
+        "elderly": "Generalmente es seguro, pero esté atento a cualquier síntoma inusual.",
+        "children": "Reduce las actividades prolongadas o pesadas al aire libre.",
+        "athletes": "Considera reducir la intensidad de los entrenamientos al aire libre."
+      },
+      "unhealthySensitive": {
+        "general": "Los miembros de grupos sensibles pueden experimentar efectos en la salud. Es menos probable que el público en general se vea afectado.",
+        "sensitive": "Reduce el esfuerzo prolongado o pesado al aire libre. Toma más descansos durante las actividades al aire libre.",
+        "elderly": "Considera trasladar actividades al interior o reprogramar cuando la calidad del aire sea mejor.",
+        "children": "Reduce las actividades prolongadas o pesadas al aire libre. Programa actividades al aire libre cuando la calidad del aire sea mejor.",
+        "athletes": "Reduce la intensidad y duración del ejercicio al aire libre."
+      },
+      "unhealthy": {
+        "general": "Algunos miembros del público en general pueden experimentar efectos en la salud; los miembros de grupos sensibles pueden experimentar efectos más graves.",
+        "sensitive": "Evita el esfuerzo prolongado o pesado al aire libre. Traslada actividades al interior o reprograma.",
+        "elderly": "Permanece en el interior y mantén los niveles de actividad bajos. Sigue el consejo de tu médico sobre el uso de medicamentos.",
+        "children": "Evita las actividades prolongadas o pesadas al aire libre. Traslada actividades al interior o reprograma.",
+        "athletes": "Traslada entrenamientos al interior o reprograma cuando mejore la calidad del aire."
+      },
+      "veryUnhealthy": {
+        "general": "Alerta de salud: el riesgo de efectos en la salud aumenta para todos.",
+        "sensitive": "Evita toda actividad física al aire libre. Traslada actividades al interior o reprograma.",
+        "elderly": "Permanece en el interior y mantén los niveles de actividad bajos. Consulta a tu médico si experimentas síntomas.",
+        "children": "Evita toda actividad física al aire libre. Mantén a los niños en el interior.",
+        "athletes": "Evita todo ejercicio al aire libre. Traslada entrenamientos al interior."
+      },
+      "hazardous": {
+        "general": "Advertencia de salud de condiciones de emergencia: es más probable que todos se vean afectados.",
+        "sensitive": "Permanece en el interior y mantén los niveles de actividad bajos. Sigue los protocolos de salud de emergencia.",
+        "elderly": "Permanece en el interior y mantén la actividad al mínimo. Busca atención médica si experimentas síntomas.",
+        "children": "Mantén a los niños en el interior con actividad mínima. Asegura una filtración de aire adecuada si está disponible.",
+        "athletes": "Evita todas las actividades al aire libre. Cancela o pospone entrenamientos y eventos al aire libre."
+      }
+    },
+    "actions": {
+      "good": [
+        "Disfruta de actividades al aire libre",
+        "No se necesitan restricciones"
+      ],
+      "moderate": [
+        "Esté atento a los síntomas si eres sensible",
+        "Reduce el esfuerzo pesado prolongado si es necesario"
+      ],
+      "unhealthySensitive": [
+        "Los grupos sensibles deben reducir la actividad al aire libre",
+        "Toma más descansos durante las actividades al aire libre",
+        "Considera reprogramar actividades extenuantes"
+      ],
+      "unhealthy": [
+        "Todos deben reducir el esfuerzo al aire libre",
+        "Los grupos sensibles deben evitar actividades al aire libre",
+        "Cierra ventanas y usa filtración de aire"
+      ],
+      "veryUnhealthy": [
+        "Evita todas las actividades físicas al aire libre",
+        "Permanece en el interior con ventanas cerradas",
+        "Usa purificadores de aire si están disponibles",
+        "Sigue el consejo de tu médico sobre el uso de inhaladores de rescate"
+      ],
+      "hazardous": [
+        "Permanece en el interior en todo momento",
+        "Mantén los niveles de actividad al mínimo",
+        "Ejecuta purificadores de aire continuamente",
+        "Busca atención médica si experimentas síntomas",
+        "Sigue los protocolos de emergencia"
+      ]
+    }
+  },
+  "footer": {
+    "about": "Acerca de AirCast",
+    "aboutText": "Monitoreo en tiempo real de la calidad del aire con el satélite TEMPO de NASA y redes de estaciones terrestres.",
+    "dataSources": "Fuentes de Datos",
+    "quickLinks": "Enlaces Rápidos",
+    "information": "Información",
+    "dashboard": "Panel",
+    "forecast": "Pronóstico",
+    "interactiveMap": "Mapa Interactivo",
+    "aboutLink": "Acerca de",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "spaceApps": "NASA Space Apps",
+    "copyright": "AirCast. Construido para NASA Space Apps Challenge 2025.",
+    "dataProvided": "Datos proporcionados por NASA TEMPO, Pandora, OpenAQ y otras fuentes públicas."
+  },
+  "errors": {
+    "generic": "Ocurrió un error",
+    "noData": "No hay datos disponibles",
+    "loadingFailed": "Error al cargar datos",
+    "locationNotFound": "Ubicación no encontrada",
+    "networkError": "Error de red. Por favor verifica tu conexión."
+  },
+  "metadata": {
+    "home": {
+      "title": "AirCast - Monitoreo de Calidad del Aire en Tiempo Real",
+      "description": "Monitorea la calidad del aire en tiempo real con datos del satélite TEMPO de NASA, Pandora y redes OpenAQ. Obtén alertas y pronósticos personalizados."
+    },
+    "forecast": {
+      "title": "Pronóstico de Calidad del Aire - AirCast",
+      "description": "Pronóstico de calidad del aire de 7 días con detalles por hora impulsado por datos satelitales de NASA y estaciones terrestres."
+    },
+    "alerts": {
+      "title": "Alertas de Calidad del Aire - AirCast",
+      "description": "Configura alertas y notificaciones personalizadas de calidad del aire para tu ubicación."
+    },
+    "map": {
+      "title": "Mapa Interactivo de Calidad del Aire - AirCast",
+      "description": "Mapa interactivo en tiempo real que muestra la calidad del aire en toda Norteamérica con datos de NASA TEMPO."
+    },
+    "sources": {
+      "title": "Fuentes de Datos - AirCast",
+      "description": "Conoce sobre NASA TEMPO, Pandora y otras fuentes de datos que impulsan el monitoreo de calidad del aire de AirCast."
+    },
+    "settings": {
+      "title": "Configuración - AirCast",
+      "description": "Administra tus preferencias, ubicaciones y configuración de cuenta para monitoreo personalizado de calidad del aire."
+    }
+  }
+}

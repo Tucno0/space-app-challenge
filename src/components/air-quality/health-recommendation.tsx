@@ -1,9 +1,11 @@
+'use client';
+
 import { AQICategory } from '@/types/air-quality';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { getHealthMessage, getHealthActionItems } from '@/lib/health-messages';
 import { Heart, Users, Baby, Dumbbell, User } from 'lucide-react';
+import { useTranslation } from '@/hooks/use-translation';
 
 interface HealthRecommendationProps {
   category: AQICategory;
@@ -19,20 +21,30 @@ export function HealthRecommendation({
   category,
   defaultAudience = 'general',
 }: HealthRecommendationProps) {
-  const actionItems = getHealthActionItems(category);
+  const { dictionary: dict } = useTranslation();
+
+  const categoryKey = category.replace(
+    /-/g,
+    ''
+  ) as keyof typeof dict.health.messages;
+  const actionItems = dict.health.actions[categoryKey] || [];
 
   const audienceConfig = [
-    { value: 'general', label: 'General Public', icon: User },
-    { value: 'sensitive', label: 'Sensitive Groups', icon: Heart },
-    { value: 'elderly', label: 'Elderly', icon: Users },
-    { value: 'children', label: 'Children', icon: Baby },
-    { value: 'athletes', label: 'Athletes', icon: Dumbbell },
+    { value: 'general', label: dict.health.audiences.general, icon: User },
+    { value: 'sensitive', label: dict.health.audiences.sensitive, icon: Heart },
+    { value: 'elderly', label: dict.health.audiences.elderly, icon: Users },
+    { value: 'children', label: dict.health.audiences.children, icon: Baby },
+    {
+      value: 'athletes',
+      label: dict.health.audiences.athletes,
+      icon: Dumbbell,
+    },
   ];
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Health Recommendations</CardTitle>
+        <CardTitle>{dict.health.recommendations}</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue={defaultAudience} className="w-full">
@@ -50,37 +62,36 @@ export function HealthRecommendation({
             ))}
           </TabsList>
 
-          {audienceConfig.map(({ value }) => (
-            <TabsContent key={value} value={value} className="space-y-4">
-              <Alert>
-                <AlertDescription>
-                  {getHealthMessage(
-                    category,
-                    value as
-                      | 'general'
-                      | 'sensitive'
-                      | 'elderly'
-                      | 'children'
-                      | 'athletes'
-                  )}
-                </AlertDescription>
-              </Alert>
+          {audienceConfig.map(({ value }) => {
+            const audienceType =
+              value as keyof typeof dict.health.messages.good;
+            const message =
+              dict.health.messages[categoryKey]?.[audienceType] || '';
 
-              {value === 'general' && (
-                <div className="space-y-2">
-                  <h4 className="font-medium text-sm">What You Should Do:</h4>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    {actionItems.map((item, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <span className="text-primary mt-0.5">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </TabsContent>
-          ))}
+            return (
+              <TabsContent key={value} value={value} className="space-y-4">
+                <Alert>
+                  <AlertDescription>{message}</AlertDescription>
+                </Alert>
+
+                {value === 'general' && actionItems.length > 0 && (
+                  <div className="space-y-2">
+                    <h4 className="font-medium text-sm">
+                      {dict.health.whatYouShouldDo}
+                    </h4>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
+                      {actionItems.map((item, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <span className="text-primary mt-0.5">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </TabsContent>
+            );
+          })}
         </Tabs>
       </CardContent>
     </Card>

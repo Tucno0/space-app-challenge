@@ -8,8 +8,11 @@ import { LocationSelector } from '@/components/location/location-selector';
 import { CurrentLocationButton } from '@/components/location/current-location-button';
 import { ThemeToggle } from './theme-toggle';
 import { Navigation } from './navigation';
+import { LanguageSwitcher } from './language-switcher';
+import { useLanguage } from '@/contexts/language-context';
 
 export function Header() {
+  const { locale } = useLanguage();
   const [location, setLocation] = useState('Los Angeles, CA');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -22,7 +25,7 @@ export function Header() {
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href={`/${locale}`} className="flex items-center gap-2">
           <div className="rounded-lg bg-primary p-1.5">
             <Cloud className="h-5 w-5 text-primary-foreground" />
           </div>
@@ -47,6 +50,7 @@ export function Header() {
             />
           </div>
 
+          <LanguageSwitcher />
           <ThemeToggle />
 
           {/* Mobile menu button */}

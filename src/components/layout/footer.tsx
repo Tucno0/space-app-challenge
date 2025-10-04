@@ -1,8 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { Satellite, Globe, Radio } from 'lucide-react';
+import { useLanguage } from '@/contexts/language-context';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { locale, dictionary: dict } = useLanguage();
 
   return (
     <footer className="border-t bg-muted/50">
@@ -10,16 +14,15 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* About */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold">About AirCast</h3>
+            <h3 className="text-sm font-semibold">{dict.footer.about}</h3>
             <p className="text-sm text-muted-foreground">
-              Real-time air quality monitoring powered by NASA&apos;s TEMPO
-              satellite and ground station networks.
+              {dict.footer.aboutText}
             </p>
           </div>
 
           {/* Data Sources */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold">Data Sources</h3>
+            <h3 className="text-sm font-semibold">{dict.footer.dataSources}</h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                 <Satellite className="h-4 w-4" />
@@ -56,38 +59,38 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold">Quick Links</h3>
+            <h3 className="text-sm font-semibold">{dict.footer.quickLinks}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link
-                  href="/"
+                  href={`/${locale}`}
                   className="hover:text-foreground transition-colors"
                 >
-                  Dashboard
+                  {dict.footer.dashboard}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/forecast"
+                  href={`/${locale}/forecast`}
                   className="hover:text-foreground transition-colors"
                 >
-                  Forecast
+                  {dict.footer.forecast}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/map"
+                  href={`/${locale}/map`}
                   className="hover:text-foreground transition-colors"
                 >
-                  Interactive Map
+                  {dict.footer.interactiveMap}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/sources"
+                  href={`/${locale}/sources`}
                   className="hover:text-foreground transition-colors"
                 >
-                  Data Sources
+                  {dict.footer.dataSources}
                 </Link>
               </li>
             </ul>
@@ -95,30 +98,30 @@ export function Footer() {
 
           {/* Legal */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold">Information</h3>
+            <h3 className="text-sm font-semibold">{dict.footer.information}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link
-                  href="/about"
+                  href={`/${locale}/about`}
                   className="hover:text-foreground transition-colors"
                 >
-                  About
+                  {dict.footer.aboutLink}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/privacy"
+                  href={`/${locale}/privacy`}
                   className="hover:text-foreground transition-colors"
                 >
-                  Privacy Policy
+                  {dict.footer.privacy}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/terms"
+                  href={`/${locale}/terms`}
                   className="hover:text-foreground transition-colors"
                 >
-                  Terms of Service
+                  {dict.footer.terms}
                 </Link>
               </li>
               <li>
@@ -128,7 +131,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors"
                 >
-                  NASA Space Apps
+                  {dict.footer.spaceApps}
                 </a>
               </li>
             </ul>
@@ -138,12 +141,9 @@ export function Footer() {
         <div className="mt-8 pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
             <p>
-              © {currentYear} AirCast. Built for NASA Space Apps Challenge 2025.
+              © {currentYear} {dict.footer.copyright}
             </p>
-            <p className="text-xs">
-              Data provided by NASA TEMPO, Pandora, OpenAQ, and other public
-              sources.
-            </p>
+            <p className="text-xs">{dict.footer.dataProvided}</p>
           </div>
         </div>
       </div>

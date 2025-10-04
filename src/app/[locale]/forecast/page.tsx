@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import type { Metadata } from 'next';
 import {
   Card,
   CardContent,
@@ -22,8 +23,10 @@ import {
 import { getAQICategoryLabel } from '@/lib/aqi-calculator';
 import { Wind, Droplets, Thermometer, AlertTriangle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { useTranslation } from '@/hooks/use-translation';
 
 export default function ForecastPage() {
+  const { dictionary: dict } = useTranslation();
   const [selectedDay, setSelectedDay] = useState(0);
   const forecast = mockForecastData;
 
@@ -32,10 +35,10 @@ export default function ForecastPage() {
       {/* Header */}
       <div className="space-y-2">
         <h1 className="text-4xl font-bold tracking-tight">
-          Air Quality Forecast
+          {dict.forecast.title}
         </h1>
         <p className="text-muted-foreground text-lg">
-          {forecast.location.name} - 7-Day Forecast
+          {forecast.location.name} - {dict.forecast.subtitle}
         </p>
       </div>
 
@@ -45,7 +48,7 @@ export default function ForecastPage() {
           {forecast.alerts.map((alert, index) => (
             <Alert key={index} variant="destructive">
               <AlertTriangle className="h-4 w-4" />
-              <AlertTitle>Forecast Alert</AlertTitle>
+              <AlertTitle>{dict.forecast.forecastAlert}</AlertTitle>
               <AlertDescription>{alert}</AlertDescription>
             </Alert>
           ))}
@@ -65,7 +68,7 @@ export default function ForecastPage() {
               className="flex-col gap-1 min-w-[100px]"
             >
               <div className="text-xs">
-                {index === 0 ? 'Today' : formatDayOfWeek(day.date)}
+                {index === 0 ? dict.forecast.today : formatDayOfWeek(day.date)}
               </div>
               <div className="text-xs text-muted-foreground">
                 {formatShortDate(day.date)}
@@ -84,14 +87,16 @@ export default function ForecastPage() {
             {/* Day Summary */}
             <Card>
               <CardHeader>
-                <CardTitle>{formatDayOfWeek(day.date)} Forecast</CardTitle>
+                <CardTitle>
+                  {formatDayOfWeek(day.date)} {dict.forecast.dayForecast}
+                </CardTitle>
                 <CardDescription>{day.summary}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-4">
                   <div className="space-y-1">
                     <div className="text-xs text-muted-foreground">
-                      Average AQI
+                      {dict.forecast.averageAQI}
                     </div>
                     <div className="text-2xl font-bold">{day.aqiAvg}</div>
                     <div className="text-xs">
@@ -100,28 +105,30 @@ export default function ForecastPage() {
                   </div>
                   <div className="space-y-1">
                     <div className="text-xs text-muted-foreground">
-                      AQI Range
+                      {dict.forecast.aqiRange}
                     </div>
                     <div className="text-2xl font-bold">
                       {day.aqiMin} - {day.aqiMax}
                     </div>
-                    <div className="text-xs">Min to Max</div>
+                    <div className="text-xs">{dict.forecast.minToMax}</div>
                   </div>
                   <div className="space-y-1">
                     <div className="text-xs text-muted-foreground">
-                      Primary Pollutant
+                      {dict.forecast.primaryPollutant}
                     </div>
                     <div className="text-2xl font-bold">
                       {day.primaryPollutant.toUpperCase()}
                     </div>
-                    <div className="text-xs">Most significant</div>
+                    <div className="text-xs">
+                      {dict.forecast.mostSignificant}
+                    </div>
                   </div>
                   <div className="space-y-1">
                     <div className="text-xs text-muted-foreground">
-                      Peak Hours
+                      {dict.forecast.peakHours}
                     </div>
                     <div className="text-2xl font-bold">2-6 PM</div>
-                    <div className="text-xs">Highest AQI</div>
+                    <div className="text-xs">{dict.forecast.highestAQI}</div>
                   </div>
                 </div>
               </CardContent>
@@ -130,14 +137,14 @@ export default function ForecastPage() {
             {/* Hourly Forecast Chart */}
             <ForecastChart
               forecasts={day.hourly}
-              title="24-Hour Detailed Forecast"
-              description="AQI, temperature, and humidity throughout the day"
+              title={dict.forecast.hourlyForecast}
+              description={dict.forecast.hourlyDescription}
             />
 
             {/* Hourly Details */}
             <Card>
               <CardHeader>
-                <CardTitle>Hourly Conditions</CardTitle>
+                <CardTitle>{dict.forecast.hourlyConditions}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -158,19 +165,19 @@ export default function ForecastPage() {
                           </div>
                           <div className="space-y-2">
                             <MetricDisplay
-                              label="Temperature"
+                              label={dict.stats.temperature}
                               value={Math.round(hour.temperature)}
                               unit="°C"
                               icon={Thermometer}
                             />
                             <MetricDisplay
-                              label="Humidity"
+                              label={dict.stats.humidity}
                               value={Math.round(hour.humidity)}
                               unit="%"
                               icon={Droplets}
                             />
                             <MetricDisplay
-                              label="Wind"
+                              label={dict.stats.windSpeed}
                               value={Math.round(hour.windSpeed)}
                               unit="km/h"
                               icon={Wind}
@@ -192,8 +199,8 @@ export default function ForecastPage() {
           timestamp: d.date,
           value: d.aqiAvg,
         }))}
-        title="7-Day AQI Trend"
-        description="Average daily AQI for the week ahead"
+        title={dict.forecast.weekTrend}
+        description={dict.forecast.weekTrendDescription}
       />
     </div>
   );

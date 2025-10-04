@@ -4,34 +4,37 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, TrendingUp, Bell, Map, Database, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/language-context';
 
 interface NavigationProps {
   mobile?: boolean;
   onNavigate?: () => void;
 }
 
-const navItems = [
-  { href: '/', label: 'Dashboard', icon: Home },
-  { href: '/forecast', label: 'Forecast', icon: TrendingUp },
-  { href: '/alerts', label: 'Alerts', icon: Bell },
-  { href: '/map', label: 'Map', icon: Map },
-  { href: '/sources', label: 'Data Sources', icon: Database },
-  { href: '/settings', label: 'Settings', icon: Settings },
-];
-
 export function Navigation({ mobile = false, onNavigate }: NavigationProps) {
   const pathname = usePathname();
+  const { locale, dictionary: dict } = useLanguage();
+
+  const navItems = [
+    { href: '', label: dict.navigation.dashboard, icon: Home },
+    { href: '/forecast', label: dict.navigation.forecast, icon: TrendingUp },
+    { href: '/alerts', label: dict.navigation.alerts, icon: Bell },
+    { href: '/map', label: dict.navigation.map, icon: Map },
+    { href: '/sources', label: dict.navigation.dataSources, icon: Database },
+    { href: '/settings', label: dict.navigation.settings, icon: Settings },
+  ];
 
   if (mobile) {
     return (
       <nav className="flex flex-col space-y-1">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href;
+          const fullPath = `/${locale}${item.href}`;
+          const isActive = pathname === fullPath;
           return (
             <Link
               key={item.href}
-              href={item.href}
+              href={fullPath}
               onClick={onNavigate}
               className={cn(
                 'flex items-center gap-3 px-3 py-2 rounded-lg transition-colors',
@@ -53,11 +56,12 @@ export function Navigation({ mobile = false, onNavigate }: NavigationProps) {
     <nav className="flex items-center gap-1">
       {navItems.map((item) => {
         const Icon = item.icon;
-        const isActive = pathname === item.href;
+        const fullPath = `/${locale}${item.href}`;
+        const isActive = pathname === fullPath;
         return (
           <Link
             key={item.href}
-            href={item.href}
+            href={fullPath}
             className={cn(
               'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
               isActive

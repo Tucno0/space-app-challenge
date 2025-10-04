@@ -1,0 +1,337 @@
+{
+  "common": {
+    "appName": "AirCast",
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "remove": "Remove",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "viewAll": "View All",
+    "viewMore": "View More",
+    "learnMore": "Learn More",
+    "accessData": "Access Data",
+    "exportData": "Export Data",
+    "comingSoon": "Coming soon",
+    "loadingMap": "Loading map..."
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "forecast": "Forecast",
+    "alerts": "Alerts",
+    "map": "Map",
+    "dataSources": "Data Sources",
+    "settings": "Settings"
+  },
+  "home": {
+    "title": "Air Quality Dashboard",
+    "subtitle": "Real-time air quality monitoring powered by NASA TEMPO and ground stations",
+    "pollutantLevels": "Pollutant Levels",
+    "interactiveMap": "Interactive Map",
+    "fullScreenMap": "Full Screen Map",
+    "healthRecommendations": "Health Recommendations",
+    "recentAlerts": "Recent Alerts",
+    "viewAllAlerts": "View All Alerts",
+    "ctaTitle": "How's Your Air?",
+    "ctaDescription": "Get personalized air quality forecasts and alerts tailored to your location and health needs.",
+    "viewForecast": "View Forecast",
+    "configureAlerts": "Configure Alerts"
+  },
+  "stats": {
+    "temperature": "Temperature",
+    "feelsLike": "Feels like",
+    "windSpeed": "Wind Speed",
+    "humidity": "Humidity",
+    "pressure": "Pressure",
+    "comfortable": "Comfortable",
+    "normal": "Normal",
+    "swDirection": "SW Direction"
+  },
+  "forecast": {
+    "title": "Air Quality Forecast",
+    "subtitle": "7-Day Forecast",
+    "forecastAlert": "Forecast Alert",
+    "today": "Today",
+    "dayForecast": "Forecast",
+    "averageAQI": "Average AQI",
+    "aqiRange": "AQI Range",
+    "minToMax": "Min to Max",
+    "primaryPollutant": "Primary Pollutant",
+    "mostSignificant": "Most significant",
+    "peakHours": "Peak Hours",
+    "highestAQI": "Highest AQI",
+    "hourlyForecast": "24-Hour Detailed Forecast",
+    "hourlyDescription": "AQI, temperature, and humidity throughout the day",
+    "hourlyConditions": "Hourly Conditions",
+    "weekTrend": "7-Day AQI Trend",
+    "weekTrendDescription": "Average daily AQI for the week ahead"
+  },
+  "alerts": {
+    "title": "Air Quality Alerts",
+    "subtitle": "Manage your alerts and notification preferences",
+    "activeAlerts": "Active Alerts",
+    "settings": "Settings",
+    "profile": "Profile",
+    "noAlerts": "No Active Alerts",
+    "noAlertsDescription": "You'll see air quality alerts here when conditions change",
+    "pastAlerts": "Past Alerts",
+    "dismissed": "Alert dismissed",
+    "preferencesSaved": "Alert preferences saved successfully",
+    "profileChanged": "Profile changed to"
+  },
+  "map": {
+    "title": "Interactive Air Quality Map",
+    "subtitle": "Real-time monitoring across North America",
+    "legend": "Map Legend",
+    "zoom": "Zoom",
+    "layers": "Layers",
+    "stations": "Stations",
+    "satellite": "Satellite Data"
+  },
+  "sources": {
+    "title": "Data Sources",
+    "subtitle": "Learn about the scientific instruments and networks that power AirCast",
+    "primarySource": "Primary Data Source",
+    "coverage": "Coverage",
+    "greaterNorthAmerica": "Greater North America",
+    "temporalResolution": "Temporal Resolution",
+    "hourlyDaylight": "Hourly during daylight",
+    "spatialResolution": "Spatial Resolution",
+    "cityLevel": "~10 km at city-level",
+    "keyPollutants": "Key Pollutants",
+    "orbit": "Orbit",
+    "geostationary": "Geostationary",
+    "launchDate": "Launch Date",
+    "april2023": "April 2023",
+    "groundStations": "Ground Station Networks",
+    "groundDescription": "Ground-based monitoring stations provide validation and complementary measurements to satellite data.",
+    "stations": "stations",
+    "dataFrequency": "Data Frequency",
+    "totalStations": "Total Stations",
+    "visitWebsite": "Visit Website",
+    "methodology": "Data Processing & Methodology",
+    "dataIntegration": "Data Integration",
+    "dataIntegrationText": "AirCast combines satellite observations from NASA TEMPO with ground-based measurements from Pandora, TolNet, and OpenAQ networks to provide comprehensive air quality assessments.",
+    "qualityAssurance": "Quality Assurance",
+    "qualityAssuranceText": "All data undergoes rigorous quality control procedures. Satellite retrievals are validated against ground-based measurements to ensure accuracy. Data quality flags are applied to all observations.",
+    "aqiCalculation": "AQI Calculation",
+    "aqiCalculationText": "Air Quality Index values are calculated following EPA standards using measured concentrations of key pollutants including ozone, nitrogen dioxide, sulfur dioxide, and particulate matter.",
+    "forecastModels": "Forecast Models",
+    "forecastModelsText": "Forecasts are generated using historical data patterns, current observations, and meteorological forecasts. Machine learning models help predict pollution transport and dispersion.",
+    "attribution": "Data Attribution & Licensing",
+    "attributionText": "All data sources used in AirCast are publicly available and open access. We acknowledge:",
+    "attributionList": {
+      "tempo": "NASA TEMPO mission and the Atmospheric Science Data Center",
+      "pandora": "NASA Pandora Project at Goddard Space Flight Center",
+      "tolnet": "TolNet - Tropospheric Ozone Lidar Network",
+      "openaq": "OpenAQ and contributing data providers worldwide",
+      "epa": "U.S. EPA for AQI methodology and health guidelines"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your preferences and account settings",
+    "preferences": "Preferences",
+    "profile": "Profile",
+    "locations": "Locations",
+    "data": "Data",
+    "preferencesSaved": "Preferences saved successfully",
+    "profileUpdated": "Profile updated to",
+    "locationAdded": "Location added to saved locations",
+    "locationRemoved": "Location removed",
+    "dataExportStarted": "Data export started - this feature is coming soon!",
+    "savedLocations": "Saved Locations",
+    "savedLocationsDescription": "Quickly access air quality data for your favorite locations",
+    "addNewLocation": "Add New Location",
+    "yourSavedLocations": "Your Saved Locations",
+    "accountInfo": "Account Information",
+    "accountInfoDescription": "Optional - Sign in to sync across devices",
+    "name": "Name",
+    "nameOptional": "Name (Optional)",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailOptional": "Email (Optional)",
+    "emailPlaceholder": "your.email@example.com",
+    "saveAccountInfo": "Save Account Info",
+    "dataManagement": "Data Management",
+    "dataManagementDescription": "Manage your air quality data and privacy",
+    "exportYourData": "Export Your Data",
+    "exportDescription": "Download all your saved locations, preferences, and alert history",
+    "clearLocalData": "Clear Local Data",
+    "clearDataDescription": "Remove all locally stored data from this browser",
+    "clearAllData": "Clear All Data",
+    "privacy": "Privacy",
+    "privacyText": "AirCast respects your privacy. We only collect data necessary to provide air quality information. Location data is only used when you explicitly request it and is not stored on our servers.",
+    "units": "Units",
+    "metric": "Metric",
+    "imperial": "Imperial",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "dataRefresh": "Data Refresh Interval",
+    "showWeatherData": "Show Weather Data",
+    "showStationMarkers": "Show Station Markers"
+  },
+  "aqi": {
+    "categories": {
+      "good": "Good",
+      "moderate": "Moderate",
+      "unhealthySensitive": "Unhealthy for Sensitive Groups",
+      "unhealthy": "Unhealthy",
+      "veryUnhealthy": "Very Unhealthy",
+      "hazardous": "Hazardous"
+    },
+    "index": "Air Quality Index",
+    "level": "Level",
+    "lastUpdated": "Last updated"
+  },
+  "pollutants": {
+    "o3": "Ozone",
+    "no2": "Nitrogen Dioxide",
+    "so2": "Sulfur Dioxide",
+    "formaldehyde": "Formaldehyde",
+    "pm25": "PM2.5",
+    "pm10": "PM10"
+  },
+  "health": {
+    "recommendations": "Health Recommendations",
+    "whatYouShouldDo": "What You Should Do:",
+    "audiences": {
+      "general": "General Public",
+      "sensitive": "Sensitive Groups",
+      "elderly": "Elderly",
+      "children": "Children",
+      "athletes": "Athletes"
+    },
+    "messages": {
+      "good": {
+        "general": "Air quality is satisfactory, and air pollution poses little or no risk.",
+        "sensitive": "Enjoy your outdoor activities.",
+        "elderly": "Safe to spend time outdoors.",
+        "children": "Great day for outdoor play and activities.",
+        "athletes": "Perfect conditions for outdoor exercise and training."
+      },
+      "moderate": {
+        "general": "Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution.",
+        "sensitive": "Consider reducing prolonged or heavy outdoor exertion.",
+        "elderly": "It's generally safe, but watch for any unusual symptoms.",
+        "children": "Reduce prolonged or heavy outdoor activities.",
+        "athletes": "Consider reducing the intensity of outdoor workouts."
+      },
+      "unhealthySensitive": {
+        "general": "Members of sensitive groups may experience health effects. The general public is less likely to be affected.",
+        "sensitive": "Reduce prolonged or heavy outdoor exertion. Take more breaks during outdoor activities.",
+        "elderly": "Consider moving activities indoors or rescheduling to when air quality is better.",
+        "children": "Reduce prolonged or heavy outdoor activities. Schedule outdoor activities when air quality is better.",
+        "athletes": "Reduce the intensity and duration of outdoor exercise."
+      },
+      "unhealthy": {
+        "general": "Some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects.",
+        "sensitive": "Avoid prolonged or heavy outdoor exertion. Move activities indoors or reschedule.",
+        "elderly": "Stay indoors and keep activity levels low. Follow your doctor's advice about medication use.",
+        "children": "Avoid prolonged or heavy outdoor activities. Move activities indoors or reschedule.",
+        "athletes": "Move workouts indoors or reschedule to when air quality improves."
+      },
+      "veryUnhealthy": {
+        "general": "Health alert: The risk of health effects is increased for everyone.",
+        "sensitive": "Avoid all physical activity outdoors. Move activities indoors or reschedule.",
+        "elderly": "Remain indoors and keep activity levels low. Consult your doctor if you experience symptoms.",
+        "children": "Avoid all physical activity outdoors. Keep children indoors.",
+        "athletes": "Avoid all outdoor exercise. Move workouts indoors."
+      },
+      "hazardous": {
+        "general": "Health warning of emergency conditions: everyone is more likely to be affected.",
+        "sensitive": "Remain indoors and keep activity levels low. Follow emergency health protocols.",
+        "elderly": "Remain indoors and keep activity minimal. Seek medical attention if experiencing symptoms.",
+        "children": "Keep children indoors with minimal activity. Ensure proper air filtration if available.",
+        "athletes": "Avoid all outdoor activities. Cancel or postpone outdoor training and events."
+      }
+    },
+    "actions": {
+      "good": ["Enjoy outdoor activities", "No restrictions needed"],
+      "moderate": [
+        "Watch for symptoms if you're sensitive",
+        "Reduce prolonged heavy exertion if needed"
+      ],
+      "unhealthySensitive": [
+        "Sensitive groups should reduce outdoor activity",
+        "Take more breaks during outdoor activities",
+        "Consider rescheduling strenuous activities"
+      ],
+      "unhealthy": [
+        "Everyone should reduce outdoor exertion",
+        "Sensitive groups should avoid outdoor activities",
+        "Close windows and use air filtration"
+      ],
+      "veryUnhealthy": [
+        "Avoid all outdoor physical activities",
+        "Stay indoors with windows closed",
+        "Use air purifiers if available",
+        "Follow your doctor's advice about using rescue inhalers"
+      ],
+      "hazardous": [
+        "Remain indoors at all times",
+        "Keep activity levels to a minimum",
+        "Run air purifiers continuously",
+        "Seek medical attention if experiencing symptoms",
+        "Follow emergency protocols"
+      ]
+    }
+  },
+  "footer": {
+    "about": "About AirCast",
+    "aboutText": "Real-time air quality monitoring powered by NASA's TEMPO satellite and ground station networks.",
+    "dataSources": "Data Sources",
+    "quickLinks": "Quick Links",
+    "information": "Information",
+    "dashboard": "Dashboard",
+    "forecast": "Forecast",
+    "interactiveMap": "Interactive Map",
+    "aboutLink": "About",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "spaceApps": "NASA Space Apps",
+    "copyright": "AirCast. Built for NASA Space Apps Challenge 2025.",
+    "dataProvided": "Data provided by NASA TEMPO, Pandora, OpenAQ, and other public sources."
+  },
+  "errors": {
+    "generic": "An error occurred",
+    "noData": "No data available",
+    "loadingFailed": "Failed to load data",
+    "locationNotFound": "Location not found",
+    "networkError": "Network error. Please check your connection."
+  },
+  "metadata": {
+    "home": {
+      "title": "AirCast - Real-Time Air Quality Monitoring",
+      "description": "Monitor air quality in real-time with data from NASA TEMPO satellite, Pandora, and OpenAQ networks. Get personalized alerts and forecasts."
+    },
+    "forecast": {
+      "title": "Air Quality Forecast - AirCast",
+      "description": "7-day air quality forecast with hourly details powered by NASA satellite data and ground stations."
+    },
+    "alerts": {
+      "title": "Air Quality Alerts - AirCast",
+      "description": "Configure personalized air quality alerts and notifications for your location."
+    },
+    "map": {
+      "title": "Interactive Air Quality Map - AirCast",
+      "description": "Real-time interactive map showing air quality across North America with NASA TEMPO data."
+    },
+    "sources": {
+      "title": "Data Sources - AirCast",
+      "description": "Learn about NASA TEMPO, Pandora, and other data sources powering AirCast air quality monitoring."
+    },
+    "settings": {
+      "title": "Settings - AirCast",
+      "description": "Manage your preferences, locations, and account settings for personalized air quality monitoring."
+    }
+  }
+}

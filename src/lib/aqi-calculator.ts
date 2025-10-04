@@ -9,16 +9,18 @@ export function getAQICategory(aqi: number): AQICategory {
   return 'hazardous';
 }
 
+// This is a placeholder - actual translations are done in components using dictionary
 export function getAQICategoryLabel(category: AQICategory): string {
-  const labels: Record<AQICategory, string> = {
-    good: 'Good',
-    moderate: 'Moderate',
-    'unhealthy-sensitive': 'Unhealthy for Sensitive Groups',
-    unhealthy: 'Unhealthy',
-    'very-unhealthy': 'Very Unhealthy',
-    hazardous: 'Hazardous',
+  // Map category to translation key pattern
+  const keyMap: Record<AQICategory, string> = {
+    good: 'good',
+    moderate: 'moderate',
+    'unhealthy-sensitive': 'unhealthySensitive',
+    unhealthy: 'unhealthy',
+    'very-unhealthy': 'veryUnhealthy',
+    hazardous: 'hazardous',
   };
-  return labels[category];
+  return keyMap[category];
 }
 
 export function getAQIRange(category: AQICategory): {
@@ -45,16 +47,9 @@ export function calculatePollutantAQI(concentration: number): number {
   return Math.min(Math.floor(concentration * 2), 500);
 }
 
+// Returns translation key for pollutant name
 export function getPollutantName(type: string): string {
-  const names: Record<string, string> = {
-    o3: 'Ozone',
-    no2: 'Nitrogen Dioxide',
-    so2: 'Sulfur Dioxide',
-    formaldehyde: 'Formaldehyde',
-    pm25: 'PM2.5',
-    pm10: 'PM10',
-  };
-  return names[type] || type.toUpperCase();
+  return type.toLowerCase();
 }
 
 export function getPollutantUnit(type: string): string {

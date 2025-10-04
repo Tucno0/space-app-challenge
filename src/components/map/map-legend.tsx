@@ -1,10 +1,13 @@
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AQICategory } from '@/types/air-quality';
-import { getAQICategoryLabel, getAQIRange } from '@/lib/aqi-calculator';
+import { getAQIRange } from '@/lib/aqi-calculator';
 import {
   getAQICategoryColor,
   getAQICategoryTextColor,
 } from '@/lib/color-scales';
+import { useTranslation } from '@/hooks/use-translation';
 
 const categories: AQICategory[] = [
   'good',
@@ -15,16 +18,30 @@ const categories: AQICategory[] = [
   'hazardous',
 ];
 
+const categoryLabels: Record<
+  AQICategory,
+  keyof typeof import('@/../locales/en.json')['aqi']['categories']
+> = {
+  good: 'good',
+  moderate: 'moderate',
+  'unhealthy-sensitive': 'unhealthySensitive',
+  unhealthy: 'unhealthy',
+  'very-unhealthy': 'veryUnhealthy',
+  hazardous: 'hazardous',
+};
+
 export function MapLegend() {
+  const { dictionary: dict } = useTranslation();
+
   return (
     <Card>
       <CardHeader className="pb-3">
-        <CardTitle className="text-sm">Air Quality Index</CardTitle>
+        <CardTitle className="text-sm">{dict.aqi.index}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-1">
         {categories.map((category) => {
           const range = getAQIRange(category);
-          const label = getAQICategoryLabel(category);
+          const label = dict.aqi.categories[categoryLabels[category]];
           const backgroundColor = getAQICategoryColor(category);
           const textColor = getAQICategoryTextColor(category);
 

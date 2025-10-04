@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import type { Metadata } from 'next';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AlertCard } from '@/components/alerts/alert-card';
 import { AlertConfigForm } from '@/components/alerts/alert-config-form';
@@ -9,25 +10,27 @@ import { mockAlerts, mockAlertPreferences } from '@/lib/mock-data/alerts-data';
 import { AlertPreferences, AudienceType } from '@/types/alert';
 import { toast } from 'sonner';
 import { Bell, Settings, User } from 'lucide-react';
+import { useTranslation } from '@/hooks/use-translation';
 
 export default function AlertsPage() {
+  const { dictionary: dict } = useTranslation();
   const [alerts, setAlerts] = useState(mockAlerts);
   const [preferences, setPreferences] =
     useState<AlertPreferences>(mockAlertPreferences);
 
   const handleDismissAlert = (id: string) => {
     setAlerts(alerts.filter((a) => a.id !== id));
-    toast.success('Alert dismissed');
+    toast.success(dict.alerts.dismissed);
   };
 
   const handleSavePreferences = (newPreferences: AlertPreferences) => {
     setPreferences(newPreferences);
-    toast.success('Alert preferences saved successfully');
+    toast.success(dict.alerts.preferencesSaved);
   };
 
   const handleAudienceChange = (audience: AudienceType) => {
     setPreferences({ ...preferences, audienceType: audience });
-    toast.success(`Profile changed to ${audience}`);
+    toast.success(`${dict.alerts.profileChanged} ${audience}`);
   };
 
   const activeAlerts = alerts.filter(
@@ -42,11 +45,9 @@ export default function AlertsPage() {
       {/* Header */}
       <div className="space-y-2">
         <h1 className="text-4xl font-bold tracking-tight">
-          Air Quality Alerts
+          {dict.alerts.title}
         </h1>
-        <p className="text-muted-foreground text-lg">
-          Manage your alerts and notification preferences
-        </p>
+        <p className="text-muted-foreground text-lg">{dict.alerts.subtitle}</p>
       </div>
 
       {/* Tabs */}
@@ -54,7 +55,7 @@ export default function AlertsPage() {
         <TabsList>
           <TabsTrigger value="active" className="gap-2">
             <Bell className="h-4 w-4" />
-            Active Alerts
+            {dict.alerts.activeAlerts}
             {activeAlerts.length > 0 && (
               <span className="ml-1 px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-xs">
                 {activeAlerts.length}
@@ -63,11 +64,11 @@ export default function AlertsPage() {
           </TabsTrigger>
           <TabsTrigger value="settings" className="gap-2">
             <Settings className="h-4 w-4" />
-            Settings
+            {dict.alerts.settings}
           </TabsTrigger>
           <TabsTrigger value="profile" className="gap-2">
             <User className="h-4 w-4" />
-            Profile
+            {dict.alerts.profile}
           </TabsTrigger>
         </TabsList>
 
@@ -76,9 +77,11 @@ export default function AlertsPage() {
           {activeAlerts.length === 0 ? (
             <div className="text-center py-12 border rounded-lg bg-muted/50">
               <Bell className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No Active Alerts</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {dict.alerts.noAlerts}
+              </h3>
               <p className="text-sm text-muted-foreground">
-                You&apos;ll see air quality alerts here when conditions change
+                {dict.alerts.noAlertsDescription}
               </p>
             </div>
           ) : (
@@ -95,7 +98,9 @@ export default function AlertsPage() {
 
           {pastAlerts.length > 0 && (
             <div className="space-y-4 pt-8">
-              <h2 className="text-xl font-semibold">Past Alerts</h2>
+              <h2 className="text-xl font-semibold">
+                {dict.alerts.pastAlerts}
+              </h2>
               <div className="grid gap-4 opacity-60">
                 {pastAlerts.map((alert) => (
                   <AlertCard key={alert.id} alert={alert} />

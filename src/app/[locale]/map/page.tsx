@@ -1,25 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { MapControls } from '@/components/map/map-controls';
 import { MapLegend } from '@/components/map/map-legend';
 import { LocationAutocomplete } from '@/components/location/location-autocomplete';
 import { CurrentLocationButton } from '@/components/location/current-location-button';
-
-// Importación dinámica del mapa para evitar errores de SSR con Leaflet
-const AirQualityMap = dynamic(
-  () =>
-    import('@/components/map/air-quality-map').then((mod) => mod.AirQualityMap),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="flex items-center justify-center h-[600px] bg-muted/30 rounded-lg">
-        <p className="text-muted-foreground">Cargando mapa interactivo...</p>
-      </div>
-    ),
-  }
-);
 import { mockLocationAQI } from '@/lib/mock-data/air-quality-data';
 import { mockGroundStations } from '@/lib/mock-data/stations-data';
 import {
@@ -31,8 +18,23 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { DataSourceBadge } from '@/components/data/data-source-badge';
+import { useTranslation } from '@/hooks/use-translation';
+
+const AirQualityMap = dynamic(
+  () =>
+    import('@/components/map/air-quality-map').then((mod) => mod.AirQualityMap),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center h-[600px] bg-muted/30 rounded-lg">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    ),
+  }
+);
 
 export default function MapPage() {
+  const { dictionary: dict } = useTranslation();
   const [center, setCenter] = useState<[number, number]>([34.0522, -118.2437]);
   const [zoom, setZoom] = useState(6);
   const [layers, setLayers] = useState([
@@ -50,7 +52,6 @@ export default function MapPage() {
   };
 
   const handleLocationSelect = (location: string) => {
-    // In real app, geocode the location
     console.log('Selected location:', location);
   };
 
@@ -76,11 +77,9 @@ export default function MapPage() {
       <div className="space-y-4">
         <div className="space-y-2">
           <h1 className="text-4xl font-bold tracking-tight">
-            Interactive Air Quality Map
+            {dict.map.title}
           </h1>
-          <p className="text-muted-foreground text-lg">
-            Explore real-time air quality data across North America
-          </p>
+          <p className="text-muted-foreground text-lg">{dict.map.subtitle}</p>
         </div>
 
         {/* Search Bar */}
@@ -114,7 +113,9 @@ export default function MapPage() {
           {/* Data Source Attribution */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm">Data Sources</CardTitle>
+              <CardTitle className="text-sm">
+                {dict.footer.dataSources}
+              </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-wrap gap-2">
               <DataSourceBadge source="tempo" />
@@ -135,9 +136,9 @@ export default function MapPage() {
           {/* Station Info */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm">Ground Stations</CardTitle>
+              <CardTitle className="text-sm">{dict.map.stations}</CardTitle>
               <CardDescription className="text-xs">
-                {activeStations.length} active stations
+                {activeStations.length} {dict.sources.stations}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
@@ -160,22 +161,30 @@ export default function MapPage() {
           {/* Quick Stats */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm">Coverage</CardTitle>
+              <CardTitle className="text-sm">{dict.sources.coverage}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
               <div className="flex justify-between">
-                <span className="text-muted-foreground">TEMPO Coverage</span>
-                <span className="font-semibold">North America</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Update Frequency</span>
-                <span className="font-semibold">Hourly</span>
+                <span className="text-muted-foreground">
+                  TEMPO {dict.sources.coverage}
+                </span>
+                <span className="font-semibold">
+                  {dict.sources.greaterNorthAmerica}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">
-                  Spatial Resolution
+                  {dict.sources.temporalResolution}
                 </span>
-                <span className="font-semibold">~10 km</span>
+                <span className="font-semibold">
+                  {dict.sources.hourlyDaylight}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">
+                  {dict.sources.spatialResolution}
+                </span>
+                <span className="font-semibold">{dict.sources.cityLevel}</span>
               </div>
             </CardContent>
           </Card>

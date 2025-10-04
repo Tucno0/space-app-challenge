@@ -9,16 +9,21 @@ import { Badge } from '@/components/ui/badge';
 import { Satellite, Radio, Globe, ExternalLink } from 'lucide-react';
 import { stationNetworks } from '@/lib/mock-data/stations-data';
 import { Button } from '@/components/ui/button';
+import { getDictionary } from '@/lib/get-dictionary';
+import type { PageProps } from '@/types/locale';
 
-export default function SourcesPage() {
+export default async function SourcesPage({ params }: PageProps) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale);
+
   return (
     <div className="container py-8 space-y-8">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-4xl font-bold tracking-tight">Data Sources</h1>
-        <p className="text-muted-foreground text-lg">
-          Learn about the scientific instruments and networks that power AirCast
-        </p>
+        <h1 className="text-4xl font-bold tracking-tight">
+          {dict.sources.title}
+        </h1>
+        <p className="text-muted-foreground text-lg">{dict.sources.subtitle}</p>
       </div>
 
       {/* NASA TEMPO Satellite */}
@@ -36,7 +41,7 @@ export default function SourcesPage() {
                 </CardDescription>
               </div>
             </div>
-            <Badge>Primary Data Source</Badge>
+            <Badge>{dict.sources.primarySource}</Badge>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -49,36 +54,48 @@ export default function SourcesPage() {
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div className="space-y-1">
-              <div className="text-sm font-medium">Coverage</div>
+              <div className="text-sm font-medium">{dict.sources.coverage}</div>
               <div className="text-sm text-muted-foreground">
-                Greater North America
+                {dict.sources.greaterNorthAmerica}
               </div>
             </div>
             <div className="space-y-1">
-              <div className="text-sm font-medium">Temporal Resolution</div>
+              <div className="text-sm font-medium">
+                {dict.sources.temporalResolution}
+              </div>
               <div className="text-sm text-muted-foreground">
-                Hourly during daylight
+                {dict.sources.hourlyDaylight}
               </div>
             </div>
             <div className="space-y-1">
-              <div className="text-sm font-medium">Spatial Resolution</div>
+              <div className="text-sm font-medium">
+                {dict.sources.spatialResolution}
+              </div>
               <div className="text-sm text-muted-foreground">
-                ~10 km at city-level
+                {dict.sources.cityLevel}
               </div>
             </div>
             <div className="space-y-1">
-              <div className="text-sm font-medium">Key Pollutants</div>
+              <div className="text-sm font-medium">
+                {dict.sources.keyPollutants}
+              </div>
               <div className="text-sm text-muted-foreground">
                 O₃, NO₂, SO₂, HCHO, aerosols
               </div>
             </div>
             <div className="space-y-1">
-              <div className="text-sm font-medium">Orbit</div>
-              <div className="text-sm text-muted-foreground">Geostationary</div>
+              <div className="text-sm font-medium">{dict.sources.orbit}</div>
+              <div className="text-sm text-muted-foreground">
+                {dict.sources.geostationary}
+              </div>
             </div>
             <div className="space-y-1">
-              <div className="text-sm font-medium">Launch Date</div>
-              <div className="text-sm text-muted-foreground">April 2023</div>
+              <div className="text-sm font-medium">
+                {dict.sources.launchDate}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                {dict.sources.april2023}
+              </div>
             </div>
           </div>
 
@@ -89,7 +106,8 @@ export default function SourcesPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn More <ExternalLink className="ml-2 h-4 w-4" />
+                {dict.common.learnMore}{' '}
+                <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>
             <Button variant="outline" asChild>
@@ -98,7 +116,8 @@ export default function SourcesPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Access Data <ExternalLink className="ml-2 h-4 w-4" />
+                {dict.common.accessData}{' '}
+                <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>
           </div>
@@ -107,10 +126,9 @@ export default function SourcesPage() {
 
       {/* Ground Station Networks */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">Ground Station Networks</h2>
+        <h2 className="text-2xl font-bold">{dict.sources.groundStations}</h2>
         <p className="text-muted-foreground">
-          Ground-based monitoring stations provide validation and complementary
-          measurements to satellite data.
+          {dict.sources.groundDescription}
         </p>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -128,7 +146,7 @@ export default function SourcesPage() {
                   <div>
                     <CardTitle>{network.name}</CardTitle>
                     <CardDescription className="text-xs">
-                      {network.coverage.totalStations} stations
+                      {network.coverage.totalStations} {dict.sources.stations}
                     </CardDescription>
                   </div>
                 </div>
@@ -140,20 +158,22 @@ export default function SourcesPage() {
 
                 <div className="grid gap-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Coverage</span>
+                    <span className="text-muted-foreground">
+                      {dict.sources.coverage}
+                    </span>
                     <span className="font-medium">
                       {network.coverage.countries.join(', ')}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">
-                      Data Frequency
+                      {dict.sources.dataFrequency}
                     </span>
                     <span className="font-medium">{network.dataFrequency}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">
-                      Total Stations
+                      {dict.sources.totalStations}
                     </span>
                     <span className="font-medium">
                       {network.coverage.totalStations}
@@ -167,7 +187,8 @@ export default function SourcesPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Visit Website <ExternalLink className="ml-2 h-4 w-4" />
+                    {dict.sources.visitWebsite}{' '}
+                    <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
               </CardContent>
@@ -179,44 +200,43 @@ export default function SourcesPage() {
       {/* Methodology */}
       <Card>
         <CardHeader>
-          <CardTitle>Data Processing & Methodology</CardTitle>
+          <CardTitle>{dict.sources.methodology}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-3 text-sm">
             <div>
-              <h4 className="font-semibold mb-1">Data Integration</h4>
+              <h4 className="font-semibold mb-1">
+                {dict.sources.dataIntegration}
+              </h4>
               <p className="text-muted-foreground">
-                AirCast combines satellite observations from NASA TEMPO with
-                ground-based measurements from Pandora, TolNet, and OpenAQ
-                networks to provide comprehensive air quality assessments.
+                {dict.sources.dataIntegrationText}
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-1">Quality Assurance</h4>
+              <h4 className="font-semibold mb-1">
+                {dict.sources.qualityAssurance}
+              </h4>
               <p className="text-muted-foreground">
-                All data undergoes rigorous quality control procedures.
-                Satellite retrievals are validated against ground-based
-                measurements to ensure accuracy. Data quality flags are applied
-                to all observations.
+                {dict.sources.qualityAssuranceText}
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-1">AQI Calculation</h4>
+              <h4 className="font-semibold mb-1">
+                {dict.sources.aqiCalculation}
+              </h4>
               <p className="text-muted-foreground">
-                Air Quality Index values are calculated following EPA standards
-                using measured concentrations of key pollutants including ozone,
-                nitrogen dioxide, sulfur dioxide, and particulate matter.
+                {dict.sources.aqiCalculationText}
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-1">Forecast Models</h4>
+              <h4 className="font-semibold mb-1">
+                {dict.sources.forecastModels}
+              </h4>
               <p className="text-muted-foreground">
-                Forecasts are generated using historical data patterns, current
-                observations, and meteorological forecasts. Machine learning
-                models help predict pollution transport and dispersion.
+                {dict.sources.forecastModelsText}
               </p>
             </div>
           </div>
@@ -226,19 +246,16 @@ export default function SourcesPage() {
       {/* Attribution */}
       <Card className="bg-muted/50">
         <CardHeader>
-          <CardTitle>Data Attribution & Licensing</CardTitle>
+          <CardTitle>{dict.sources.attribution}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
-          <p>
-            All data sources used in AirCast are publicly available and open
-            access. We acknowledge:
-          </p>
+          <p>{dict.sources.attributionText}</p>
           <ul className="list-disc list-inside space-y-1 ml-2">
-            <li>NASA TEMPO mission and the Atmospheric Science Data Center</li>
-            <li>NASA Pandora Project at Goddard Space Flight Center</li>
-            <li>TolNet - Tropospheric Ozone Lidar Network</li>
-            <li>OpenAQ and contributing data providers worldwide</li>
-            <li>U.S. EPA for AQI methodology and health guidelines</li>
+            <li>{dict.sources.attributionList.tempo}</li>
+            <li>{dict.sources.attributionList.pandora}</li>
+            <li>{dict.sources.attributionList.tolnet}</li>
+            <li>{dict.sources.attributionList.openaq}</li>
+            <li>{dict.sources.attributionList.epa}</li>
           </ul>
         </CardContent>
       </Card>
