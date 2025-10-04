@@ -7,8 +7,7 @@ import { TRPCReactProvider } from '@/trpc/client';
 import { LanguageProvider } from '@/contexts/language-context';
 import { getDictionary } from '@/lib/get-dictionary';
 import { generatePageMetadata } from '@/lib/metadata';
-import type { LayoutProps } from '@/types/locale';
-import { i18n } from '../../../i18n-config';
+import { i18n, type Locale } from '../../../i18n-config';
 import '../globals.css';
 
 const inter = Inter({
@@ -21,18 +20,28 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export async function generateMetadata({ params }: LayoutProps) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
-  return generatePageMetadata(locale, 'home');
+  return generatePageMetadata(locale as Locale, 'home');
 }
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({ children, params }: LayoutProps) {
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
-  const dictionary = await getDictionary(locale);
+  const dictionary = await getDictionary(locale as Locale);
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -43,7 +52,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <LanguageProvider locale={locale} dictionary={dictionary}>
+          <LanguageProvider locale={locale as Locale} dictionary={dictionary}>
             <TRPCReactProvider>
               <div className="flex flex-col min-h-screen">
                 <Header />

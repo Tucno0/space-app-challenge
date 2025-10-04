@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import type { Metadata } from 'next';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PreferencesForm } from '@/components/forms/preferences-form';
 import { AudienceSelector } from '@/components/forms/audience-selector';

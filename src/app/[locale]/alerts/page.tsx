@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import type { Metadata } from 'next';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AlertCard } from '@/components/alerts/alert-card';
 import { AlertConfigForm } from '@/components/alerts/alert-config-form';

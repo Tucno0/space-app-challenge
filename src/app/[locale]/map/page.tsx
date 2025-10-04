@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { MapControls } from '@/components/map/map-controls';
 import { MapLegend } from '@/components/map/map-legend';

@@ -1,7 +1,6 @@
 'use client';
 
 import { useLanguage } from '@/contexts/language-context';
-import type { Dictionary } from '@/lib/get-dictionary';
 
 /**
  * Hook to access translations in client components
@@ -13,6 +12,7 @@ export function useTranslation() {
   // Helper function to get nested translation values
   const t = (key: string): string => {
     const keys = key.split('.');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let value: any = dictionary;
 
     for (const k of keys) {
