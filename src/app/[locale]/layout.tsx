@@ -2,6 +2,9 @@ import { Geist_Mono, Inter } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'sonner';
 import { cookies } from 'next/headers';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { TRPCReactProvider } from '@/trpc/client';
@@ -77,6 +80,9 @@ export default async function LocaleLayout({
                   <main className="flex-1 w-full">{children}</main>
                   <Footer />
                 </div>
+
+                <Analytics />
+                <SpeedInsights />
                 <Toaster position="top-right" richColors />
               </LocationStoreProvider>
             </TRPCReactProvider>
