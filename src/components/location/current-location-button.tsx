@@ -5,26 +5,48 @@ import { Locate, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getCurrentLocation } from '@/lib/geolocation';
 import { toast } from 'sonner';
+import { useLocationStore } from '@/hooks/use-location-store';
+import { geoDBCityToLocation } from '@/types/location';
+import { useTRPC } from '@/trpc/client';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface CurrentLocationButtonProps {
-  onLocationDetected: (lat: number, lon: number) => void;
   variant?: 'default' | 'outline' | 'ghost';
   size?: 'default' | 'sm' | 'lg' | 'icon';
 }
 
 export function CurrentLocationButton({
-  onLocationDetected,
   variant = 'outline',
   size = 'default',
 }: CurrentLocationButtonProps) {
+  const trpc = useTRPC();
+  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
+  const setCurrentLocation = useLocationStore(
+    (state) => state.setCurrentLocation
+  );
 
   const handleGetLocation = async () => {
     setIsLoading(true);
     try {
+      // Get current geolocation
       const result = await getCurrentLocation();
-      onLocationDetected(result.coordinates.lat, result.coordinates.lon);
-      toast.success('Location detected successfully');
+      const { lat, lon } = result.coordinates;
+
+      // Fetch city information from GeoDB API using queryClient.fetchQuery
+      const city = await queryClient.fetchQuery(
+        trpc.cities.getCityByCoordinates.queryOptions({
+          lat,
+          lon,
+          radius: 50,
+        })
+      );
+
+      // Convert to Location type and save
+      const location = geoDBCityToLocation(city);
+      setCurrentLocation(location);
+
+      toast.success(`Location detected: ${location.city}, ${location.country}`);
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : 'Failed to get location'

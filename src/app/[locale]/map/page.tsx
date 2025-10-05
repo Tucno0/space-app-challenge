@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { MapControls } from '@/components/map/map-controls';
 import { MapLegend } from '@/components/map/map-legend';
@@ -18,6 +18,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { DataSourceBadge } from '@/components/data/data-source-badge';
 import { useTranslation } from '@/hooks/use-translation';
+import { useLocationStore } from '@/hooks/use-location-store';
 
 const AirQualityMap = dynamic(
   () =>
@@ -34,13 +35,30 @@ const AirQualityMap = dynamic(
 
 export default function MapPage() {
   const { dictionary: dict } = useTranslation();
-  const [center, setCenter] = useState<[number, number]>([34.0522, -118.2437]);
-  const [zoom, setZoom] = useState(6);
+  const currentLocation = useLocationStore((state) => state.currentLocation);
+
+  // Use current location from store, fallback to LA coordinates
+  const defaultCenter: [number, number] = currentLocation
+    ? [currentLocation.coordinates.lat, currentLocation.coordinates.lon]
+    : [34.0522, -118.2437];
+
+  const [center, setCenter] = useState<[number, number]>(defaultCenter);
+  const [zoom, setZoom] = useState(10);
   const [layers, setLayers] = useState([
     { id: 'aqi', name: 'Air Quality Index', enabled: true },
     { id: 'stations', name: 'Ground Stations', enabled: true },
     { id: 'events', name: 'Air Quality Events', enabled: false },
   ]);
+
+  // Update center when location changes
+  useEffect(() => {
+    if (currentLocation) {
+      setCenter([
+        currentLocation.coordinates.lat,
+        currentLocation.coordinates.lon,
+      ]);
+    }
+  }, [currentLocation]);
 
   const handleLayerToggle = (layerId: string, enabled: boolean) => {
     setLayers(
@@ -48,15 +66,6 @@ export default function MapPage() {
         layer.id === layerId ? { ...layer, enabled } : layer
       )
     );
-  };
-
-  const handleLocationSelect = (location: string) => {
-    console.log('Selected location:', location);
-  };
-
-  const handleLocationDetected = (lat: number, lon: number) => {
-    setCenter([lat, lon]);
-    setZoom(10);
   };
 
   const aqiMarkers = Object.values(mockLocationAQI).map((data) => ({
@@ -84,12 +93,9 @@ export default function MapPage() {
         {/* Search Bar */}
         <div className="flex gap-2 max-w-xl">
           <div className="flex-1">
-            <LocationAutocomplete onLocationSelect={handleLocationSelect} />
+            <LocationAutocomplete />
           </div>
-          <CurrentLocationButton
-            onLocationDetected={handleLocationDetected}
-            size="default"
-          />
+          <CurrentLocationButton size="default" />
         </div>
       </div>
 

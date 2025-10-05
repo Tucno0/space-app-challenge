@@ -59,14 +59,14 @@ export default function ForecastPage() {
         value={selectedDay.toString()}
         onValueChange={(v) => setSelectedDay(parseInt(v))}
       >
-        <TabsList className="w-full justify-start overflow-x-auto">
+        <TabsList className="w-full justify-start overflow-x-auto h-auto p-1 gap-2">
           {forecast.daily.map((day, index) => (
             <TabsTrigger
               key={index}
               value={index.toString()}
-              className="flex-col gap-1 min-w-[100px]"
+              className="flex-col gap-1.5 min-w-[100px] h-auto py-3 px-3"
             >
-              <div className="text-xs">
+              <div className="text-xs font-medium">
                 {index === 0 ? dict.forecast.today : formatDayOfWeek(day.date)}
               </div>
               <div className="text-xs text-muted-foreground">

@@ -16,6 +16,7 @@ import { Wind, Droplets, Gauge, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useTranslation } from '@/hooks/use-translation';
+import { useLocationStore } from '@/hooks/use-location-store';
 
 const AirQualityMap = dynamic(
   () =>
@@ -34,8 +35,15 @@ const AirQualityMap = dynamic(
 
 export default function HomePage() {
   const { dictionary: dict, locale } = useTranslation();
+  const currentLocation = useLocationStore((state) => state.currentLocation);
+
   const airQualityData = mockCurrentAirQuality;
   const recentAlerts = mockAlerts.slice(0, 2);
+
+  // Use current location from store for map center, fallback to mock data
+  const mapCenter: [number, number] = currentLocation
+    ? [currentLocation.coordinates.lat, currentLocation.coordinates.lon]
+    : [airQualityData.aqi.location.lat, airQualityData.aqi.location.lon];
 
   const mapMarkers = Object.values(mockLocationAQI).map((data) => ({
     lat: data.aqi.location.lat,
@@ -109,10 +117,7 @@ export default function HomePage() {
               </Link>
             </div>
             <AirQualityMap
-              center={[
-                airQualityData.aqi.location.lat,
-                airQualityData.aqi.location.lon,
-              ]}
+              center={mapCenter}
               zoom={6}
               height="400px"
               markers={mapMarkers}

@@ -13,13 +13,7 @@ import { useLanguage } from '@/contexts/language-context';
 
 export function Header() {
   const { locale } = useLanguage();
-  const [location, setLocation] = useState('Los Angeles, CA');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const handleLocationDetected = (lat: number, lon: number) => {
-    // In a real app, reverse geocode to get location name
-    setLocation(`${lat.toFixed(2)}, ${lon.toFixed(2)}`);
-  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -40,14 +34,8 @@ export function Header() {
         {/* Actions */}
         <div className="flex items-center gap-2">
           <div className="hidden lg:flex items-center gap-2">
-            <LocationSelector
-              currentLocation={location}
-              onLocationChange={setLocation}
-              savedLocations={['Los Angeles, CA', 'New York, NY']}
-            />
-            <CurrentLocationButton
-              onLocationDetected={handleLocationDetected}
-            />
+            <LocationSelector />
+            <CurrentLocationButton />
           </div>
 
           <LanguageSwitcher />
@@ -75,22 +63,12 @@ export function Header() {
           <div className="container py-4 space-y-4">
             <Navigation mobile onNavigate={() => setMobileMenuOpen(false)} />
             <div className="space-y-2 pt-4 border-t">
-              <LocationSelector
-                currentLocation={location}
-                onLocationChange={(loc) => {
-                  setLocation(loc);
-                  setMobileMenuOpen(false);
-                }}
-                savedLocations={['Los Angeles, CA', 'New York, NY']}
-              />
-              <CurrentLocationButton
-                onLocationDetected={(lat, lon) => {
-                  handleLocationDetected(lat, lon);
-                  setMobileMenuOpen(false);
-                }}
-                variant="outline"
-                size="default"
-              />
+              <div className="flex items-center gap-2">
+                <div className="flex-1">
+                  <LocationSelector />
+                </div>
+                <CurrentLocationButton variant="outline" size="default" />
+              </div>
             </div>
           </div>
         </div>
