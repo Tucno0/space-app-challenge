@@ -54,7 +54,7 @@
   },
   "forecast": {
     "title": "Pronóstico de Calidad del Aire",
-    "subtitle": "Pronóstico de 7 Días",
+    "subtitle": "Pronóstico de 5 Días",
     "forecastAlert": "Alerta de Pronóstico",
     "today": "Hoy",
     "dayForecast": "Pronóstico",
@@ -68,7 +68,7 @@
     "hourlyForecast": "Pronóstico Detallado de 24 Horas",
     "hourlyDescription": "ICA, temperatura y humedad durante el día",
     "hourlyConditions": "Condiciones por Hora",
-    "weekTrend": "Tendencia de ICA de 7 Días",
+    "weekTrend": "Tendencia de ICA de 5 Días",
     "weekTrendDescription": "ICA diario promedio para la próxima semana"
   },
   "alerts": {

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Successfully integrated real-time air quality and weather data into the ICA Predict dashboard using IQAir (with WAQI fallback) and OpenWeatherMap One Call API 3.0.
+Successfully integrated real-time air quality and weather data into the ICA Predict dashboard using IQAir (with WAQI fallback), OpenWeatherMap One Call API 3.0, and ICA Predict custom forecast API for Ayacucho, Peru.
 
 ## ✅ Implementation Completed
 
@@ -115,6 +115,8 @@ WAQI_API_KEY="c59654930280ea99ae95d97b2843016ba0c93ada"
 
 OPENWEATHERMAP_API_URL="https://api.openweathermap.org/data/3.0/onecall"
 OPENWEATHERMAP_API_KEY="0eeeec55964857bb36c4e49d8b7010d5"
+
+ICA_PREDICT_API_URL="https://backendnasalyrial-a9a0bde6erdaexf9.canadacentral-01.azurewebsites.net"
 ```
 
 ## Data Flow
@@ -186,6 +188,43 @@ Successfully integrated real-time air quality monitoring stations on interactive
 
 See `MAP_STATIONS_IMPLEMENTATION.md` for complete documentation.
 
+## Weather Forecast Integration
+
+### ICA Predict Forecast API
+
+**File**: `src/trpc/routers/weather.ts` - `getForecast`
+
+Successfully integrated custom AI-powered weather forecast for Ayacucho, Peru:
+
+- **API**: ICA Predict Custom API
+- **Coverage**: Ayacucho, Peru only
+- **Forecast Window**: 5 days
+- **Update Frequency**: Daily
+- **Features**:
+  - AI machine learning predictions
+  - Historical pattern analysis
+  - No coordinates required (Ayacucho-specific)
+  - Temperature, dewpoint, pressure, wind speed, precipitation
+  - Unit conversions (m/s to km/h)
+  - Daily aggregates with visual charts
+
+**Endpoint**: `https://backendnasalyrial-a9a0bde6erdaexf9.canadacentral-01.azurewebsites.net/weather/forecast`
+
+**Implementation**:
+
+- ✅ Forecast page (`src/app/[locale]/forecast/page.tsx`)
+- ✅ Daily forecast chart component (`src/components/charts/daily-forecast-chart.tsx`)
+- ✅ Weather router with getForecast procedure
+
+**Data Transformation**:
+
+- Temperature/dewpoint: °C (rounded to 1 decimal)
+- Wind speed: m/s → km/h conversion
+- Pressure: hPa (rounded)
+- Precipitation: mm (rounded)
+
+See `FORECAST_IMPLEMENTATION.md` for complete documentation.
+
 ## Known Limitations
 
 1. **Date Serialization**: tRPC serializes Date objects to strings - handled with client-side conversion
@@ -215,28 +254,40 @@ See `MAP_STATIONS_IMPLEMENTATION.md` for complete documentation.
 
 ## Files Modified/Created
 
-**New Files (4)**:
+**New Files (6)**:
 
 1. `src/types/api-responses.ts`
 2. `src/trpc/routers/air-quality.ts`
 3. `src/trpc/routers/weather.ts`
 4. `src/components/data/dashboard-skeleton.tsx`
+5. `src/components/charts/daily-forecast-chart.tsx`
+6. `FORECAST_IMPLEMENTATION.md`
 
-**Modified Files (3)**:
+**Modified Files (5)**:
 
 1. `src/trpc/routers/_app.ts`
 2. `src/trpc/query-client.ts`
 3. `src/app/[locale]/page.tsx`
+4. `src/app/[locale]/forecast/page.tsx`
+5. `.env.example`
 
 ## Status
 
 ✅ **Implementation Complete**
 ✅ **All Linter Errors Resolved**
 ✅ **Ready for Testing**
+✅ **Forecast Integration Complete**
+✅ **Production Ready**
 
 ---
 
 **Implemented**: October 2025
 **Next.js Version**: 15.5.4
 **tRPC Version**: 11.6.0
-**APIs Integrated**: IQAir, WAQI, OpenWeatherMap One Call API 3.0
+**APIs Integrated**:
+
+- IQAir (with WAQI fallback)
+- WAQI Map Bounds API
+- OpenWeatherMap One Call API 3.0
+- NASA FIRMS (Fire detection)
+- ICA Predict Custom Forecast API

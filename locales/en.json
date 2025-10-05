@@ -68,7 +68,7 @@
     "hourlyForecast": "24-Hour Detailed Forecast",
     "hourlyDescription": "AQI, temperature, and humidity throughout the day",
     "hourlyConditions": "Hourly Conditions",
-    "weekTrend": "7-Day AQI Trend",
+    "weekTrend": "5-Day AQI Trend",
     "weekTrendDescription": "Average daily AQI for the week ahead"
   },
   "alerts": {

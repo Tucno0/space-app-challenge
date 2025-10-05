@@ -105,3 +105,15 @@ export interface OpenWeatherOneCallResponse {
     };
   };
 }
+
+// ICA Predict API Response Types (Our own forecast API)
+export interface ICAPredictForecastItem {
+  date: string; // Format: "YYYY-MM-DD"
+  temperature_celsius: number;
+  dewpoint_celsius: number;
+  pressure_hpa: number;
+  wind_speed: number; // m/s
+  precipitation_mm: number;
+}
+
+export type ICAPredictForecastResponse = ICAPredictForecastItem[];
