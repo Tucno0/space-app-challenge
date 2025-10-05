@@ -116,7 +116,8 @@ export default function MapPage() {
   const aqiMarkers =
     mapStationsQuery.data && mapStationsQuery.data.length > 0
       ? mapStationsQuery.data
-      : Object.values(mockLocationAQI).map((data) => ({
+      : Object.values(mockLocationAQI).map((data, index) => ({
+          id: index,
           lat: data.aqi.location.lat,
           lon: data.aqi.location.lon,
           aqi: data.aqi.value,
@@ -226,10 +227,7 @@ export default function MapPage() {
               ) : aqiMarkers.length > 0 ? (
                 <>
                   {aqiMarkers.slice(0, 5).map((station) => (
-                    <div
-                      key={station.id ?? station.name}
-                      className="text-xs space-y-1"
-                    >
+                    <div key={station.id} className="text-xs space-y-1">
                       <div className="flex items-start justify-between">
                         <span className="font-medium">{station.name}</span>
                         <Badge

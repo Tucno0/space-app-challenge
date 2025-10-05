@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { baseProcedure, createTRPCRouter } from '../init';
 import { TRPCError } from '@trpc/server';
 import type { Alert, AlertSeverity, AlertType } from '@/types/alert';
-import type { AQICategory } from '@/types/air-quality';
+import type { AQICategory, PollutantType } from '@/types/air-quality';
 import { getAQICategory } from '@/lib/aqi-calculator';
 
 const WAQI_API_KEY = process.env.WAQI_API_KEY;
@@ -92,7 +92,7 @@ function generateAQIAlert(
     location,
     aqiValue: aqi,
     category: category as AQICategory,
-    pollutant: pollutant as any,
+    pollutant: pollutant as PollutantType,
     actionable: true,
     recommendations,
   };
