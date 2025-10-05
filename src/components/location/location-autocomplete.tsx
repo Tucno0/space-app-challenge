@@ -22,10 +22,12 @@ import { useQuery } from '@tanstack/react-query';
 
 interface LocationAutocompleteProps {
   placeholder?: string;
+  onLocationSelect?: (location: string) => void;
 }
 
 export function LocationAutocomplete({
   placeholder = 'Search for a city...',
+  onLocationSelect,
 }: LocationAutocompleteProps) {
   const trpc = useTRPC();
   const [open, setOpen] = useState(false);
@@ -51,7 +53,18 @@ export function LocationAutocomplete({
     const selectedCity = cities?.find((city) => city.id === cityId);
     if (selectedCity) {
       const location = geoDBCityToLocation(selectedCity);
-      setCurrentLocation(location);
+
+      // If custom callback is provided, use it
+      if (onLocationSelect) {
+        const locationString = `${selectedCity.name}, ${
+          selectedCity.region ? selectedCity.region + ', ' : ''
+        }${selectedCity.country}`;
+        onLocationSelect(locationString);
+      } else {
+        // Otherwise, use the default behavior of updating current location
+        setCurrentLocation(location);
+      }
+
       setSearch('');
       setOpen(false);
       inputRef.current?.blur();
