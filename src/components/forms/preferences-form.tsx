@@ -48,7 +48,7 @@ export function PreferencesForm({
     <Card>
       <CardHeader>
         <CardTitle>General Preferences</CardTitle>
-        <CardDescription>Customize your AirCast experience</CardDescription>
+        <CardDescription>Customize your ICA Predict experience</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-4">

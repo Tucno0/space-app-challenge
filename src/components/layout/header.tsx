@@ -23,7 +23,7 @@ export function Header() {
           <div className="rounded-lg bg-primary p-1.5">
             <Cloud className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-bold">AirCast</span>
+          <span className="text-xl font-bold">ICA Predict</span>
         </Link>
 
         {/* Desktop Navigation */}

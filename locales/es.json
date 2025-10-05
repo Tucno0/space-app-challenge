@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "AirCast",
+    "appName": "ICA Predict",
     "loading": "Cargando...",
     "error": "Error",
     "save": "Guardar",
@@ -91,11 +91,13 @@
     "zoom": "Zoom",
     "layers": "Capas",
     "stations": "Estaciones",
-    "satellite": "Datos Satelitales"
+    "satellite": "Datos Satelitales",
+    "selectLocationPrompt": "Busca o selecciona una ubicación en el mapa para ver datos detallados de calidad del aire",
+    "clickMapInstruction": "Haz clic en cualquier ubicación del mapa para ver los datos de calidad del aire de esa área"
   },
   "sources": {
     "title": "Fuentes de Datos",
-    "subtitle": "Conoce los instrumentos científicos y redes que impulsan AirCast",
+    "subtitle": "Conoce los instrumentos científicos y redes que impulsan ICA Predict",
     "primarySource": "Fuente de Datos Principal",
     "coverage": "Cobertura",
     "greaterNorthAmerica": "Norteamérica y más",
@@ -116,7 +118,7 @@
     "visitWebsite": "Visitar Sitio Web",
     "methodology": "Procesamiento de Datos y Metodología",
     "dataIntegration": "Integración de Datos",
-    "dataIntegrationText": "AirCast combina observaciones satelitales de NASA TEMPO con mediciones terrestres de las redes Pandora, TolNet y OpenAQ para proporcionar evaluaciones completas de la calidad del aire.",
+    "dataIntegrationText": "ICA Predict combina observaciones satelitales de NASA TEMPO con mediciones terrestres de las redes Pandora, TolNet y OpenAQ para proporcionar evaluaciones completas de la calidad del aire.",
     "qualityAssurance": "Garantía de Calidad",
     "qualityAssuranceText": "Todos los datos pasan por rigurosos procedimientos de control de calidad. Las recuperaciones satelitales se validan contra mediciones terrestres para garantizar precisión. Se aplican banderas de calidad de datos a todas las observaciones.",
     "aqiCalculation": "Cálculo del ICA",
@@ -124,7 +126,7 @@
     "forecastModels": "Modelos de Pronóstico",
     "forecastModelsText": "Los pronósticos se generan utilizando patrones de datos históricos, observaciones actuales y pronósticos meteorológicos. Los modelos de aprendizaje automático ayudan a predecir el transporte y dispersión de la contaminación.",
     "attribution": "Atribución y Licencias de Datos",
-    "attributionText": "Todas las fuentes de datos utilizadas en AirCast están disponibles públicamente y son de acceso abierto. Agradecemos a:",
+    "attributionText": "Todas las fuentes de datos utilizadas en ICA Predict están disponibles públicamente y son de acceso abierto. Agradecemos a:",
     "attributionList": {
       "tempo": "Misión NASA TEMPO y el Centro de Datos de Ciencias Atmosféricas",
       "pandora": "Proyecto NASA Pandora en el Centro de Vuelo Espacial Goddard",
@@ -166,7 +168,7 @@
     "clearDataDescription": "Eliminar todos los datos almacenados localmente de este navegador",
     "clearAllData": "Borrar Todos los Datos",
     "privacy": "Privacidad",
-    "privacyText": "AirCast respeta tu privacidad. Solo recopilamos datos necesarios para proporcionar información de calidad del aire. Los datos de ubicación solo se usan cuando lo solicitas explícitamente y no se almacenan en nuestros servidores.",
+    "privacyText": "ICA Predict respeta tu privacidad. Solo recopilamos datos necesarios para proporcionar información de calidad del aire. Los datos de ubicación solo se usan cuando lo solicitas explícitamente y no se almacenan en nuestros servidores.",
     "units": "Unidades",
     "metric": "Métrico",
     "imperial": "Imperial",
@@ -289,7 +291,7 @@
     }
   },
   "footer": {
-    "about": "Acerca de AirCast",
+    "about": "Acerca de ICA Predict",
     "aboutText": "Monitoreo en tiempo real de la calidad del aire con el satélite TEMPO de NASA y redes de estaciones terrestres.",
     "dataSources": "Fuentes de Datos",
     "quickLinks": "Enlaces Rápidos",
@@ -301,7 +303,7 @@
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
     "spaceApps": "NASA Space Apps",
-    "copyright": "AirCast. Construido para NASA Space Apps Challenge 2025.",
+    "copyright": "ICA Predict. Construido para NASA Space Apps Challenge 2025.",
     "dataProvided": "Datos proporcionados por NASA TEMPO, Pandora, OpenAQ y otras fuentes públicas."
   },
   "errors": {
@@ -313,27 +315,27 @@
   },
   "metadata": {
     "home": {
-      "title": "AirCast - Monitoreo de Calidad del Aire en Tiempo Real",
+      "title": "ICA Predict - Monitoreo de Calidad del Aire en Tiempo Real",
       "description": "Monitorea la calidad del aire en tiempo real con datos del satélite TEMPO de NASA, Pandora y redes OpenAQ. Obtén alertas y pronósticos personalizados."
     },
     "forecast": {
-      "title": "Pronóstico de Calidad del Aire - AirCast",
+      "title": "Pronóstico de Calidad del Aire - ICA Predict",
       "description": "Pronóstico de calidad del aire de 7 días con detalles por hora impulsado por datos satelitales de NASA y estaciones terrestres."
     },
     "alerts": {
-      "title": "Alertas de Calidad del Aire - AirCast",
+      "title": "Alertas de Calidad del Aire - ICA Predict",
       "description": "Configura alertas y notificaciones personalizadas de calidad del aire para tu ubicación."
     },
     "map": {
-      "title": "Mapa Interactivo de Calidad del Aire - AirCast",
+      "title": "Mapa Interactivo de Calidad del Aire - ICA Predict",
       "description": "Mapa interactivo en tiempo real que muestra la calidad del aire en toda Norteamérica con datos de NASA TEMPO."
     },
     "sources": {
-      "title": "Fuentes de Datos - AirCast",
-      "description": "Conoce sobre NASA TEMPO, Pandora y otras fuentes de datos que impulsan el monitoreo de calidad del aire de AirCast."
+      "title": "Fuentes de Datos - ICA Predict",
+      "description": "Conoce sobre NASA TEMPO, Pandora y otras fuentes de datos que impulsan el monitoreo de calidad del aire de ICA Predict."
     },
     "settings": {
-      "title": "Configuración - AirCast",
+      "title": "Configuración - ICA Predict",
       "description": "Administra tus preferencias, ubicaciones y configuración de cuenta para monitoreo personalizado de calidad del aire."
     }
   }

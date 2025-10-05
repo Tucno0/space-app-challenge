@@ -25,33 +25,43 @@ export function Footer() {
             <h3 className="text-sm font-semibold">{dict.footer.dataSources}</h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-                <Satellite className="h-4 w-4" />
+                <Globe className="h-4 w-4" />
                 <a
-                  href="https://tempo.si.edu"
+                  href="https://www.iqair.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  NASA TEMPO
-                </a>
-              </li>
-              <li className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-                <Radio className="h-4 w-4" />
-                <a
-                  href="https://pandora.gsfc.nasa.gov"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Pandora Network
+                  IQAir
                 </a>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                 <Globe className="h-4 w-4" />
                 <a
-                  href="https://openaq.org"
+                  href="https://waqi.info"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  OpenAQ
+                  WAQI
+                </a>
+              </li>
+              <li className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                <Satellite className="h-4 w-4" />
+                <a
+                  href="https://openweathermap.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  OpenWeatherMap
+                </a>
+              </li>
+              <li className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                <Satellite className="h-4 w-4" />
+                <a
+                  href="https://firms.modaps.eosdis.nasa.gov"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  NASA FIRMS
                 </a>
               </li>
             </ul>

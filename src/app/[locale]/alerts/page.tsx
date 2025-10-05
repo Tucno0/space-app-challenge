@@ -1,24 +1,65 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AlertCard } from '@/components/alerts/alert-card';
 import { AlertConfigForm } from '@/components/alerts/alert-config-form';
 import { AudienceSelector } from '@/components/forms/audience-selector';
-import { mockAlerts, mockAlertPreferences } from '@/lib/mock-data/alerts-data';
+import { mockAlertPreferences } from '@/lib/mock-data/alerts-data';
 import { AlertPreferences, AudienceType } from '@/types/alert';
 import { toast } from 'sonner';
 import { Bell, Settings, User } from 'lucide-react';
 import { useTranslation } from '@/hooks/use-translation';
+import { useLocationStore } from '@/hooks/use-location-store';
+import { useTRPC } from '@/trpc/client';
+import { useQuery } from '@tanstack/react-query';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function AlertsPage() {
   const { dictionary: dict } = useTranslation();
-  const [alerts, setAlerts] = useState(mockAlerts);
+  const currentLocation = useLocationStore((state) => state.currentLocation);
+  const trpc = useTRPC();
+
+  const [dismissedIds, setDismissedIds] = useState<string[]>([]);
   const [preferences, setPreferences] =
     useState<AlertPreferences>(mockAlertPreferences);
 
+  // Fetch active alerts based on current location
+  const alertsQuery = useQuery(
+    trpc.alerts.getActiveAlerts.queryOptions(
+      {
+        lat: currentLocation?.coordinates.lat ?? 0,
+        lon: currentLocation?.coordinates.lon ?? 0,
+        locationName: currentLocation?.name,
+      },
+      {
+        enabled: !!currentLocation,
+        refetchInterval: 5 * 60 * 1000, // Refetch every 5 minutes
+        staleTime: 2 * 60 * 1000, // Consider data stale after 2 minutes
+      }
+    )
+  );
+
+  // Transform alert data (convert date strings to Date objects)
+  const transformedAlerts = useMemo(() => {
+    if (!alertsQuery.data) return [];
+
+    return alertsQuery.data.map((alert) => ({
+      ...alert,
+      timestamp: new Date(alert.timestamp),
+      expiresAt: alert.expiresAt ? new Date(alert.expiresAt) : undefined,
+    }));
+  }, [alertsQuery.data]);
+
+  // Filter out dismissed alerts
+  const alerts = useMemo(() => {
+    return transformedAlerts.filter(
+      (alert) => !dismissedIds.includes(alert.id)
+    );
+  }, [transformedAlerts, dismissedIds]);
+
   const handleDismissAlert = (id: string) => {
-    setAlerts(alerts.filter((a) => a.id !== id));
+    setDismissedIds([...dismissedIds, id]);
     toast.success(dict.alerts.dismissed);
   };
 
@@ -55,7 +96,7 @@ export default function AlertsPage() {
           <TabsTrigger value="active" className="gap-2">
             <Bell className="h-4 w-4" />
             {dict.alerts.activeAlerts}
-            {activeAlerts.length > 0 && (
+            {activeAlerts.length > 0 && !alertsQuery.isLoading && (
               <span className="ml-1 px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-xs">
                 {activeAlerts.length}
               </span>
@@ -73,7 +114,26 @@ export default function AlertsPage() {
 
         {/* Active Alerts */}
         <TabsContent value="active" className="space-y-4">
-          {activeAlerts.length === 0 ? (
+          {alertsQuery.isLoading ? (
+            <div className="grid gap-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="border rounded-lg p-6 space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-2 flex-1">
+                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-2/3" />
+                    </div>
+                    <Skeleton className="h-6 w-20" />
+                  </div>
+                  <div className="space-y-2">
+                    <Skeleton className="h-3 w-full" />
+                    <Skeleton className="h-3 w-5/6" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : activeAlerts.length === 0 ? (
             <div className="text-center py-12 border rounded-lg bg-muted/50">
               <Bell className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-lg font-semibold mb-2">

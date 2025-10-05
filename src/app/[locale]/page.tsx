@@ -7,16 +7,16 @@ import dynamic from 'next/dynamic';
 import { MapLegend } from '@/components/map/map-legend';
 import { StatCard } from '@/components/data/stat-card';
 import { AlertCard } from '@/components/alerts/alert-card';
-import {
-  mockCurrentAirQuality,
-  mockLocationAQI,
-} from '@/lib/mock-data/air-quality-data';
-import { mockAlerts } from '@/lib/mock-data/alerts-data';
+import { mockLocationAQI } from '@/lib/mock-data/air-quality-data';
 import { Wind, Droplets, Gauge, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useTranslation } from '@/hooks/use-translation';
 import { useLocationStore } from '@/hooks/use-location-store';
+import { useTRPC } from '@/trpc/client';
+import { useQuery } from '@tanstack/react-query';
+import { DashboardSkeleton } from '@/components/data/dashboard-skeleton';
+import { ErrorDisplay } from '@/components/data/error-display';
 
 const AirQualityMap = dynamic(
   () =>
@@ -36,21 +36,153 @@ const AirQualityMap = dynamic(
 export default function HomePage() {
   const { dictionary: dict, locale } = useTranslation();
   const currentLocation = useLocationStore((state) => state.currentLocation);
+  const trpc = useTRPC();
 
-  const airQualityData = mockCurrentAirQuality;
-  const recentAlerts = mockAlerts.slice(0, 2);
+  // Fetch air quality data
+  const airQualityQuery = useQuery(
+    trpc.airQuality.getCurrentAirQuality.queryOptions(
+      {
+        lat: currentLocation?.coordinates.lat ?? 0,
+        lon: currentLocation?.coordinates.lon ?? 0,
+      },
+      {
+        enabled: !!currentLocation,
+        staleTime: 0,
+      }
+    )
+  );
 
-  // Use current location from store for map center, fallback to mock data
+  // Fetch weather data
+  const weatherQuery = useQuery(
+    trpc.weather.getCurrentWeather.queryOptions(
+      {
+        lat: currentLocation?.coordinates.lat ?? 0,
+        lon: currentLocation?.coordinates.lon ?? 0,
+      },
+      {
+        enabled: !!currentLocation,
+        staleTime: 0,
+      }
+    )
+  );
+
+  // Fetch map stations in visible area
+  // Calculate bounds based on current location (approximate 300km radius)
+  const getMapBounds = (lat: number, lon: number) => {
+    const radiusDegrees = 3; // Approximately 300-330km
+    return {
+      south: Math.max(-90, lat - radiusDegrees),
+      west: Math.max(-180, lon - radiusDegrees),
+      north: Math.min(90, lat + radiusDegrees),
+      east: Math.min(180, lon + radiusDegrees),
+    };
+  };
+
+  const mapStationsQuery = useQuery(
+    trpc.airQuality.getMapStations.queryOptions(
+      {
+        bounds: currentLocation
+          ? getMapBounds(
+              currentLocation.coordinates.lat,
+              currentLocation.coordinates.lon
+            )
+          : { south: -90, west: -180, north: 90, east: 180 },
+      },
+      {
+        enabled: !!currentLocation,
+        staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+      }
+    )
+  );
+
+  // Fetch active alerts for current location
+  const alertsQuery = useQuery(
+    trpc.alerts.getActiveAlerts.queryOptions(
+      {
+        lat: currentLocation?.coordinates.lat ?? 0,
+        lon: currentLocation?.coordinates.lon ?? 0,
+        locationName: currentLocation?.name,
+      },
+      {
+        enabled: !!currentLocation,
+        staleTime: 2 * 60 * 1000, // Cache for 2 minutes
+      }
+    )
+  );
+
+  // Get recent alerts (top 2) and transform dates
+  const recentAlerts =
+    alertsQuery.data
+      ?.map((alert) => ({
+        ...alert,
+        timestamp: new Date(alert.timestamp),
+        expiresAt: alert.expiresAt ? new Date(alert.expiresAt) : undefined,
+      }))
+      .slice(0, 2) || [];
+
+  // Show loading skeleton when no location or data is loading
+  if (!currentLocation || airQualityQuery.isLoading || weatherQuery.isLoading) {
+    return <DashboardSkeleton />;
+  }
+
+  // Show error state if queries failed
+  if (airQualityQuery.isError || weatherQuery.isError) {
+    return (
+      <div className="container py-8">
+        <ErrorDisplay
+          title={dict.errors?.loadingFailed || 'Failed to load data'}
+          message={
+            airQualityQuery.error?.message ||
+            weatherQuery.error?.message ||
+            'Please try again later'
+          }
+          onRetry={() => {
+            airQualityQuery.refetch();
+            weatherQuery.refetch();
+          }}
+        />
+      </div>
+    );
+  }
+
+  // Extract data from queries and transform date strings to Date objects
+  const airQualityData = airQualityQuery.data
+    ? {
+        ...airQualityQuery.data,
+        aqi: {
+          ...airQualityQuery.data.aqi,
+          timestamp: new Date(airQualityQuery.data.aqi.timestamp),
+        },
+        pollutants: airQualityQuery.data.pollutants.map((p) => ({
+          ...p,
+          timestamp: new Date(p.timestamp),
+        })),
+        lastUpdated: new Date(airQualityQuery.data.lastUpdated),
+      }
+    : undefined;
+
+  const weatherData = weatherQuery.data
+    ? {
+        ...weatherQuery.data,
+        timestamp: new Date(weatherQuery.data.timestamp),
+      }
+    : undefined;
+
+  // Fallback to default coordinates if no data
   const mapCenter: [number, number] = currentLocation
     ? [currentLocation.coordinates.lat, currentLocation.coordinates.lon]
-    : [airQualityData.aqi.location.lat, airQualityData.aqi.location.lon];
+    : [34.0522, -118.2437];
 
-  const mapMarkers = Object.values(mockLocationAQI).map((data) => ({
-    lat: data.aqi.location.lat,
-    lon: data.aqi.location.lon,
-    aqi: data.aqi.value,
-    name: data.aqi.location.name,
-  }));
+  // Use real stations from WAQI API, fallback to mock data if no real data
+  const mapMarkers =
+    mapStationsQuery.data && mapStationsQuery.data.length > 0
+      ? mapStationsQuery.data
+      : Object.values(mockLocationAQI).map((data) => ({
+          lat: data.aqi.location.lat,
+          lon: data.aqi.location.lon,
+          aqi: data.aqi.value,
+          name: data.aqi.location.name,
+        }));
 
   return (
     <div className="container py-8 space-y-8">
@@ -64,33 +196,53 @@ export default function HomePage() {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Left Column - AQI Card */}
         <div className="lg:col-span-1">
-          <AQICard data={airQualityData} showDetails />
+          <AQICard data={airQualityData!} showDetails />
         </div>
 
         {/* Middle Column - Quick Stats */}
         <div className="lg:col-span-2 grid gap-4 sm:grid-cols-2">
           <StatCard
             title={dict.stats.temperature}
-            value="22°C"
-            subtitle={`${dict.stats.feelsLike} 23°C`}
+            value={`${weatherData?.temperature}°C`}
+            subtitle={`${dict.stats.feelsLike} ${weatherData?.feelsLike}°C`}
             icon={TrendingUp}
           />
           <StatCard
             title={dict.stats.windSpeed}
-            value="15 km/h"
-            subtitle={dict.stats.swDirection}
+            value={`${weatherData?.windSpeed} km/h`}
+            subtitle={
+              weatherData?.windDirection !== undefined
+                ? `${
+                    ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'][
+                      Math.round(weatherData.windDirection / 45) % 8
+                    ]
+                  } ${dict.stats.swDirection.replace('SW', '')}`
+                : dict.stats.swDirection
+            }
             icon={Wind}
           />
           <StatCard
             title={dict.stats.humidity}
-            value="65%"
-            subtitle={dict.stats.comfortable}
+            value={`${weatherData?.humidity}%`}
+            subtitle={
+              weatherData && weatherData.humidity < 30
+                ? 'Dry'
+                : weatherData && weatherData.humidity > 70
+                ? 'Humid'
+                : dict.stats.comfortable
+            }
             icon={Droplets}
           />
           <StatCard
             title={dict.stats.pressure}
-            value="1013 hPa"
-            subtitle={dict.stats.normal}
+            value={`${weatherData?.pressure} hPa`}
+            subtitle={
+              weatherData && weatherData.pressure < 1000
+                ? 'Low'
+                : weatherData && weatherData.pressure > 1020
+                ? 'High'
+                : dict.stats.normal
+            }
             icon={Gauge}
           />
         </div>
@@ -100,7 +252,7 @@ export default function HomePage() {
       <div>
         <h2 className="text-2xl font-bold mb-4">{dict.home.pollutantLevels}</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {airQualityData.pollutants.map((pollutant) => (
+          {airQualityData!.pollutants.map((pollutant) => (
             <PollutantCard key={pollutant.type} pollutant={pollutant} compact />
           ))}
         </div>
@@ -130,7 +282,7 @@ export default function HomePage() {
       </div>
 
       {/* Health Recommendations */}
-      <HealthRecommendation category={airQualityData.aqi.category} />
+      <HealthRecommendation category={airQualityData!.aqi.category} />
 
       {/* Recent Alerts */}
       {recentAlerts.length > 0 && (
