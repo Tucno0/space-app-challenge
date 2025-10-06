@@ -1,7 +1,11 @@
 import { z } from 'zod';
 import { baseProcedure, createTRPCRouter } from '../init';
 import { TRPCError } from '@trpc/server';
-import type { IQAirResponse, WAQIResponse } from '@/types/api-responses';
+import type {
+  IQAirResponse,
+  WAQIResponse,
+  IQAPredictAQIResponse,
+} from '@/types/api-responses';
 import type { AirQualityData, PollutantType } from '@/types/air-quality';
 import { getAQICategory } from '@/lib/aqi-calculator';
 
@@ -9,6 +13,7 @@ const AIRVISUAL_API_URL = process.env.AIRVISUAL_API_URL;
 const AIRVISUAL_API_KEY = process.env.AIRVISUAL_API_KEY;
 const WAQI_API_URL = process.env.WAQI_API_URL;
 const WAQI_API_KEY = process.env.WAQI_API_KEY;
+const ICA_PREDICT_API_URL = process.env.ICA_PREDICT_API_URL;
 
 if (!AIRVISUAL_API_KEY) {
   console.warn('AIRVISUAL_API_KEY is not set in environment variables');
@@ -16,6 +21,10 @@ if (!AIRVISUAL_API_KEY) {
 
 if (!WAQI_API_KEY) {
   console.warn('WAQI_API_KEY is not set in environment variables');
+}
+
+if (!ICA_PREDICT_API_URL) {
+  console.warn('ICA_PREDICT_API_URL is not set in environment variables');
 }
 
 // Helper function to transform IQAir response to AirQualityData
@@ -363,4 +372,80 @@ export const airQualityRouter = createTRPCRouter({
         });
       }
     }),
+
+  // Get AQI predictions from IQA Predict API (Ayacucho only)
+  getAQIPredictions: baseProcedure.query(async () => {
+    if (!ICA_PREDICT_API_URL) {
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'IQA Predict API URL not configured',
+      });
+    }
+
+    try {
+      const url = `${ICA_PREDICT_API_URL}/predict`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
+        cache: 'no-store', // Ensure fresh data
+      });
+
+      if (!response.ok) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: `IQA Predict API error: ${response.status} ${response.statusText}`,
+        });
+      }
+
+      const data = (await response.json()) as IQAPredictAQIResponse;
+
+      if (!data || !Array.isArray(data) || data.length === 0) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'No AQI prediction data available',
+        });
+      }
+
+      console.log(
+        `Successfully fetched ${data.length} days of AQI predictions from IQA Predict API`
+      );
+
+      // Transform the data to include proper types and structure
+      return data.map((item) => {
+        // Parse date - handle both formats
+        const dateStr = item.date.includes(' ')
+          ? item.date.split(' ')[0]
+          : item.date;
+
+        return {
+          date: dateStr,
+          aqi: Math.round(item.AQI * 10) / 10,
+          category: getAQICategory(item.AQI),
+          quality: item.quality,
+          pollutants: {
+            no2: Math.round(item.NO2_ugm3 * 10) / 10,
+            co: Math.round(item.CO_mgm3 * 10) / 10,
+            o3: Math.round(item.O3_ugm3 * 10) / 10,
+            so2: Math.round(item.SO2_ugm3 * 10) / 10,
+          },
+          aerosolIndex: Math.round(item.aerosol_index * 100) / 100,
+        };
+      });
+    } catch (error) {
+      if (error instanceof TRPCError) {
+        throw error;
+      }
+
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message:
+          error instanceof Error
+            ? error.message
+            : 'Failed to fetch AQI predictions',
+      });
+    }
+  }),
 });

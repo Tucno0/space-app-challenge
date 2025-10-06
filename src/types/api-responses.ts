@@ -117,3 +117,17 @@ export interface ICAPredictForecastItem {
 }
 
 export type ICAPredictForecastResponse = ICAPredictForecastItem[];
+
+// IQA Predict AQI Prediction Response Types
+export interface IQAPredictAQIItem {
+  date: string; // Format: "YYYY-MM-DD" or "YYYY-MM-DD HH:MM:SS.microseconds"
+  NO2_ugm3: number; // Nitrogen Dioxide in µg/m³
+  CO_mgm3: number; // Carbon Monoxide in mg/m³
+  O3_ugm3: number; // Ozone in µg/m³
+  SO2_ugm3: number; // Sulfur Dioxide in µg/m³
+  aerosol_index: number; // Aerosol Index
+  AQI: number; // Air Quality Index
+  quality: string; // Quality category (e.g., "Moderada")
+}
+
+export type IQAPredictAQIResponse = IQAPredictAQIItem[];
