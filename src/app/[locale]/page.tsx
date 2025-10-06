@@ -8,7 +8,7 @@ import { MapLegend } from '@/components/map/map-legend';
 import { StatCard } from '@/components/data/stat-card';
 import { AlertCard } from '@/components/alerts/alert-card';
 import { mockLocationAQI } from '@/lib/mock-data/air-quality-data';
-import { Wind, Droplets, Gauge, TrendingUp } from 'lucide-react';
+import { Wind, Droplets, Gauge, TrendingUp, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useTranslation } from '@/hooks/use-translation';
@@ -17,6 +17,7 @@ import { useTRPC } from '@/trpc/client';
 import { useQuery } from '@tanstack/react-query';
 import { DashboardSkeleton } from '@/components/data/dashboard-skeleton';
 import { ErrorDisplay } from '@/components/data/error-display';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const AirQualityMap = dynamic(
   () =>
@@ -36,6 +37,7 @@ const AirQualityMap = dynamic(
 export default function HomePage() {
   const { dictionary: dict, locale } = useTranslation();
   const currentLocation = useLocationStore((state) => state.currentLocation);
+  const isLocationLoading = useLocationStore((state) => state.isLoading);
   const trpc = useTRPC();
 
   // Fetch air quality data
@@ -120,8 +122,16 @@ export default function HomePage() {
       }))
       .slice(0, 2) || [];
 
-  // Show loading skeleton when no location or data is loading
-  if (!currentLocation || airQualityQuery.isLoading || weatherQuery.isLoading) {
+  // Show loading skeleton when location is initializing or data is loading
+  if (isLocationLoading || (!currentLocation && !airQualityQuery.data)) {
+    return <DashboardSkeleton />;
+  }
+
+  // Show loading skeleton when queries are loading
+  if (
+    currentLocation &&
+    (airQualityQuery.isLoading || weatherQuery.isLoading)
+  ) {
     return <DashboardSkeleton />;
   }
 
@@ -268,6 +278,17 @@ export default function HomePage() {
                 <Button variant="outline">{dict.home.fullScreenMap}</Button>
               </Link>
             </div>
+
+            {/* Location Prompt Alert */}
+            <Alert className="border-blue-200 bg-blue-50 dark:bg-blue-950/20 dark:border-blue-900">
+              <Info className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              <AlertDescription className="text-blue-800 dark:text-blue-300">
+                <span className="font-medium">
+                  {dict.map.selectLocationPrompt}
+                </span>
+              </AlertDescription>
+            </Alert>
+
             <AirQualityMap
               center={mapCenter}
               zoom={6}

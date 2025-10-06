@@ -40,6 +40,7 @@ const AirQualityMap = dynamic(
 export default function MapPage() {
   const { dictionary: dict } = useTranslation();
   const currentLocation = useLocationStore((state) => state.currentLocation);
+  const isLocationLoading = useLocationStore((state) => state.isLoading);
   const trpc = useTRPC();
 
   // Use current location from store, fallback to LA coordinates
@@ -159,11 +160,6 @@ export default function MapPage() {
           <Info className="h-4 w-4 text-blue-600 dark:text-blue-400" />
           <AlertDescription className="text-blue-800 dark:text-blue-300">
             <span className="font-medium">{dict.map.selectLocationPrompt}</span>
-            <br />
-            <span className="text-sm flex items-center gap-1 mt-1">
-              <MapPin className="h-3 w-3" />
-              {dict.map.clickMapInstruction}
-            </span>
           </AlertDescription>
         </Alert>
       </div>

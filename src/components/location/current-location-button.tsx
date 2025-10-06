@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Locate, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getCurrentLocation } from '@/lib/geolocation';
+import { DEFAULT_LOCATION } from '@/lib/default-location';
 import { toast } from 'sonner';
 import { useLocationStore } from '@/hooks/use-location-store';
 import { geoDBCityToLocation } from '@/types/location';
@@ -29,8 +30,9 @@ export function CurrentLocationButton({
   const handleGetLocation = async () => {
     setIsLoading(true);
     try {
-      // Get current geolocation
-      const result = await getCurrentLocation();
+      // Force a fresh location request, bypassing cache
+      // This will always prompt the user for permission if not granted
+      const result = await getCurrentLocation({ forceRefresh: true });
       const { lat, lon } = result.coordinates;
 
       // Fetch city information from GeoDB API using queryClient.fetchQuery
@@ -48,8 +50,18 @@ export function CurrentLocationButton({
 
       toast.success(`Location detected: ${location.city}, ${location.country}`);
     } catch (error) {
+      // If location fails, fallback to Lima
+      console.log('Location detection failed, using default location:', error);
+      setCurrentLocation(DEFAULT_LOCATION);
+
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to get location';
+
       toast.error(
-        error instanceof Error ? error.message : 'Failed to get location'
+        `${errorMessage}. Showing data for ${DEFAULT_LOCATION.name}, ${DEFAULT_LOCATION.country}.`,
+        {
+          duration: 6000,
+        }
       );
     } finally {
       setIsLoading(false);

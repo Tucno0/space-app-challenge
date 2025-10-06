@@ -5,7 +5,30 @@ export interface GeolocationResult {
   accuracy: number;
 }
 
-export async function getCurrentLocation(): Promise<GeolocationResult> {
+export interface GeolocationOptions {
+  /**
+   * Force a fresh location request, bypassing any cached location
+   * Default: false (uses cache up to 5 minutes)
+   */
+  forceRefresh?: boolean;
+  /**
+   * Timeout in milliseconds for the geolocation request
+   * Default: 10000 (10 seconds)
+   */
+  timeout?: number;
+}
+
+/**
+ * Get the current location from the browser's geolocation API
+ * @param options - Configuration options for the geolocation request
+ * @returns Promise with coordinates and accuracy
+ * @throws Error if geolocation is not supported, denied, or times out
+ */
+export async function getCurrentLocation(
+  options: GeolocationOptions = {}
+): Promise<GeolocationResult> {
+  const { forceRefresh = false, timeout = 10000 } = options;
+
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
       reject(new Error('Geolocation is not supported by your browser'));
@@ -23,15 +46,67 @@ export async function getCurrentLocation(): Promise<GeolocationResult> {
         });
       },
       (error) => {
-        reject(new Error(`Geolocation error: ${error.message}`));
+        // Provide more specific error messages based on error code
+        let errorMessage = 'Unable to get your location';
+
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage =
+              'Location access denied. Please enable location permissions in your browser settings.';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = 'Location information is unavailable.';
+            break;
+          case error.TIMEOUT:
+            errorMessage = 'Location request timed out.';
+            break;
+        }
+
+        reject(new Error(errorMessage));
       },
       {
         enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 300000, // Cache for 5 minutes
+        timeout,
+        // If forceRefresh is true, set maximumAge to 0 to force a new request
+        // Otherwise, cache for 5 minutes to avoid repeated prompts
+        maximumAge: forceRefresh ? 0 : 300000,
       }
     );
   });
+}
+
+/**
+ * Check if the browser supports geolocation
+ */
+export function isGeolocationSupported(): boolean {
+  return 'geolocation' in navigator;
+}
+
+/**
+ * Check the current permission state for geolocation
+ * Returns 'granted', 'denied', 'prompt', or 'unsupported'
+ */
+export async function checkGeolocationPermission(): Promise<
+  'granted' | 'denied' | 'prompt' | 'unsupported'
+> {
+  if (!isGeolocationSupported()) {
+    return 'unsupported';
+  }
+
+  // Check if Permissions API is available
+  if (!navigator.permissions || !navigator.permissions.query) {
+    // Permissions API not available, we can't check status
+    return 'prompt';
+  }
+
+  try {
+    const result = await navigator.permissions.query({ name: 'geolocation' });
+    return result.state as 'granted' | 'denied' | 'prompt';
+  } catch (error) {
+    // If query fails, assume prompt
+    console.warn('Could not query geolocation permission:', error);
+    return 'prompt';
+  }
 }
 
 export function calculateDistance(

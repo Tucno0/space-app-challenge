@@ -27,7 +27,6 @@ export function HealthRecommendation({
     /-/g,
     ''
   ) as keyof typeof dict.health.messages;
-  const actionItems = dict.health.actions[categoryKey] || [];
 
   const audienceConfig = [
     { value: 'general', label: dict.health.audiences.general, icon: User },
@@ -68,13 +67,17 @@ export function HealthRecommendation({
             const message =
               dict.health.messages[categoryKey]?.[audienceType] || '';
 
+            // Get audience-specific action items
+            const actionItems =
+              dict.health.actions[categoryKey]?.[audienceType] || [];
+
             return (
               <TabsContent key={value} value={value} className="space-y-4">
                 <Alert>
                   <AlertDescription>{message}</AlertDescription>
                 </Alert>
 
-                {value === 'general' && actionItems.length > 0 && (
+                {actionItems.length > 0 && (
                   <div className="space-y-2">
                     <h4 className="font-medium text-sm">
                       {dict.health.whatYouShouldDo}

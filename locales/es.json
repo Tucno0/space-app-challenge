@@ -92,7 +92,7 @@
     "layers": "Capas",
     "stations": "Estaciones",
     "satellite": "Datos Satelitales",
-    "selectLocationPrompt": "Busca o selecciona una ubicación en el mapa para ver datos detallados de calidad del aire",
+    "selectLocationPrompt": "Busca o selecciona una ubicación en el mapa para ver datos detallados de calidad del aire. Solo mostrará datos para la ubicación seleccionada.",
     "clickMapInstruction": "Haz clic en cualquier ubicación del mapa para ver los datos de calidad del aire de esa área"
   },
   "sources": {
@@ -214,80 +214,241 @@
     },
     "messages": {
       "good": {
-        "general": "La calidad del aire es satisfactoria y la contaminación del aire representa poco o ningún riesgo.",
-        "sensitive": "Disfruta de tus actividades al aire libre.",
-        "elderly": "Es seguro pasar tiempo al aire libre.",
-        "children": "Gran día para juegos y actividades al aire libre.",
-        "athletes": "Condiciones perfectas para ejercicio y entrenamiento al aire libre."
+        "general": "La calidad del aire es satisfactoria y la contaminación del aire representa poco o ningún riesgo. Este es un momento ideal para todas las actividades al aire libre. El aire está limpio y es saludable para respirar, con niveles de contaminantes muy por debajo de los estándares de salud.",
+        "sensitive": "Disfruta de tus actividades al aire libre sin restricciones. Este es un momento excelente para personas con condiciones respiratorias, enfermedades cardíacas u otras sensibilidades para estar activos al aire libre. No se necesitan precauciones especiales.",
+        "elderly": "Es seguro pasar tiempo al aire libre sin restricciones. Este es un gran día para paseos, jardinería o cualquier pasatiempo al aire libre. El aire limpio favorece la respiración saludable y la función cardiovascular.",
+        "children": "Gran día para juegos y actividades al aire libre. Los niños pueden participar con seguridad en deportes, actividades de parque infantil y juegos al aire libre durante períodos prolongados. La calidad del aire favorece el desarrollo pulmonar saludable y el juego activo.",
+        "athletes": "Condiciones perfectas para ejercicio y entrenamiento al aire libre. Puedes realizar entrenamientos de alta intensidad, carrera de larga distancia o cualquier actividad extenuante al aire libre de manera segura. La calidad del aire no afectará el rendimiento atlético ni la recuperación."
       },
       "moderate": {
-        "general": "La calidad del aire es aceptable. Sin embargo, puede haber un riesgo para algunas personas, particularmente aquellas que son inusualmente sensibles a la contaminación del aire.",
-        "sensitive": "Considera reducir el esfuerzo prolongado o pesado al aire libre.",
-        "elderly": "Generalmente es seguro, pero esté atento a cualquier síntoma inusual.",
-        "children": "Reduce las actividades prolongadas o pesadas al aire libre.",
-        "athletes": "Considera reducir la intensidad de los entrenamientos al aire libre."
+        "general": "La calidad del aire es aceptable para la mayoría de las personas. Sin embargo, puede haber un riesgo para algunos individuos, particularmente aquellos que son inusualmente sensibles a la contaminación del aire. Síntomas como tos o dificultad para respirar pueden ocurrir en personas sensibles durante actividades prolongadas al aire libre.",
+        "sensitive": "Considera reducir el esfuerzo prolongado o pesado al aire libre si experimentas síntomas como tos, opresión en el pecho o dificultad para respirar. Toma descansos en interiores si es necesario. Aquellos con asma o EPOC deben tener medicación de rescate fácilmente disponible.",
+        "elderly": "Generalmente es seguro, pero esté atento a cualquier síntoma inusual como fatiga aumentada, dificultad respiratoria o molestia en el pecho. Si tienes condiciones cardíacas o pulmonares, considera actividades más ligeras y toma descansos frecuentes.",
+        "children": "Reduce las actividades prolongadas o pesadas al aire libre, especialmente para niños con asma o alergias. Limita los deportes al aire libre a 2-3 horas. Vigila síntomas como tos excesiva, sibilancias o fatiga, y trasládate al interior si estos ocurren.",
+        "athletes": "Considera reducir la intensidad de los entrenamientos al aire libre en un 10-20%. Aún puedes entrenar al aire libre, pero evita las horas pico de contaminación (típicamente mediodía). Mantente bien hidratado y monitorea cualquier molestia respiratoria durante intervalos de alta intensidad."
       },
       "unhealthySensitive": {
-        "general": "Los miembros de grupos sensibles pueden experimentar efectos en la salud. Es menos probable que el público en general se vea afectado.",
-        "sensitive": "Reduce el esfuerzo prolongado o pesado al aire libre. Toma más descansos durante las actividades al aire libre.",
-        "elderly": "Considera trasladar actividades al interior o reprogramar cuando la calidad del aire sea mejor.",
-        "children": "Reduce las actividades prolongadas o pesadas al aire libre. Programa actividades al aire libre cuando la calidad del aire sea mejor.",
-        "athletes": "Reduce la intensidad y duración del ejercicio al aire libre."
+        "general": "Los miembros de grupos sensibles pueden experimentar efectos en la salud incluyendo aumento de síntomas respiratorios, agravamiento de enfermedades cardíacas o pulmonares, y disminución de la función pulmonar. Es menos probable que el público en general se vea afectado, pero puede experimentar irritación menor durante actividades prolongadas al aire libre.",
+        "sensitive": "Reduce el esfuerzo prolongado o pesado al aire libre. Toma más descansos durante las actividades al aire libre, limitando la exposición continua al aire libre a 30-60 minutos. Traslada actividades al interior si experimentas tos, dificultad para respirar u opresión en el pecho. Usa medicamentos prescritos según lo recomendado por tu médico.",
+        "elderly": "Considera trasladar actividades al interior o reprogramar para cuando la calidad del aire sea mejor, particularmente si tienes condiciones cardíacas o pulmonares. Las salidas cortas al exterior (15-30 minutos) son generalmente aceptables, pero evita actividades extenuantes. Cierra ventanas y usa aire acondicionado con filtros limpios.",
+        "children": "Reduce las actividades prolongadas o pesadas al aire libre a menos de 1 hora por vez. Programa actividades al aire libre durante la mañana temprano o la tarde cuando la calidad del aire suele ser mejor. Vigila síntomas como tos persistente, sibilancias o dificultad para respirar. Los niños con asma deben tener su inhalador fácilmente disponible.",
+        "athletes": "Reduce la intensidad y duración del ejercicio al aire libre en un 30-50%. Considera cambiar a instalaciones de entrenamiento interiores. Si entrenas al aire libre, elige las horas de la mañana temprano y evita intervalos de alta intensidad. Permite más tiempo de recuperación entre esfuerzos intensos y mantente bien hidratado."
       },
       "unhealthy": {
-        "general": "Algunos miembros del público en general pueden experimentar efectos en la salud; los miembros de grupos sensibles pueden experimentar efectos más graves.",
-        "sensitive": "Evita el esfuerzo prolongado o pesado al aire libre. Traslada actividades al interior o reprograma.",
-        "elderly": "Permanece en el interior y mantén los niveles de actividad bajos. Sigue el consejo de tu médico sobre el uso de medicamentos.",
-        "children": "Evita las actividades prolongadas o pesadas al aire libre. Traslada actividades al interior o reprograma.",
-        "athletes": "Traslada entrenamientos al interior o reprograma cuando mejore la calidad del aire."
+        "general": "Todos pueden comenzar a experimentar efectos en la salud incluyendo dificultad para respirar, tos e irritación ocular. Los miembros de grupos sensibles pueden experimentar efectos más graves como agravamiento de enfermedades cardiovasculares o respiratorias. No se recomienda la exposición prolongada al aire libre.",
+        "sensitive": "Evita el esfuerzo prolongado o pesado al aire libre. Traslada actividades al interior o reprograma para un día con mejor calidad del aire. Si debes salir, mantén las salidas breves (menos de 15 minutos) y evita actividad física. Usa purificadores de aire en interiores y mantén las ventanas cerradas. Ten medicamentos fácilmente accesibles.",
+        "elderly": "Permanece en el interior y mantén los niveles de actividad bajos a moderados. Sigue el consejo de tu médico sobre el uso de medicamentos, y considera aumentar las dosis de medicamentos respiratorios prescritos si se aconseja. Cierra todas las ventanas, usa aire acondicionado con filtros HEPA, y evita usar chimeneas o velas que puedan empeorar la calidad del aire interior.",
+        "children": "Evita las actividades prolongadas o pesadas al aire libre. Mantén a los niños en el interior con ventanas cerradas. La exposición breve al exterior (5-10 minutos) para actividades necesarias es aceptable, pero sin correr o jugar activamente. Vigila síntomas como tos persistente, sibilancias, dolor en el pecho o dificultad para respirar y busca atención médica si es grave.",
+        "athletes": "Traslada los entrenamientos al interior o reprograma cuando mejore la calidad del aire. Debe evitarse cualquier entrenamiento al aire libre. Usa instalaciones interiores para entrenamiento cardiovascular y de fuerza. Este no es el momento para competencias al aire libre o sesiones de entrenamiento de alta intensidad que requieran tasas de respiración elevadas."
       },
       "veryUnhealthy": {
-        "general": "Alerta de salud: el riesgo de efectos en la salud aumenta para todos.",
-        "sensitive": "Evita toda actividad física al aire libre. Traslada actividades al interior o reprograma.",
-        "elderly": "Permanece en el interior y mantén los niveles de actividad bajos. Consulta a tu médico si experimentas síntomas.",
-        "children": "Evita toda actividad física al aire libre. Mantén a los niños en el interior.",
-        "athletes": "Evita todo ejercicio al aire libre. Traslada entrenamientos al interior."
+        "general": "Alerta de salud: el riesgo de efectos en la salud aumenta significativamente para todos. La mayoría de las personas experimentarán dificultad para respirar, tos, opresión en el pecho e irritación ocular. Este nivel de calidad del aire puede desencadenar respuestas graves de salud en personas sensibles. La actividad al aire libre debe minimizarse para todos los grupos.",
+        "sensitive": "Evita toda actividad física al aire libre. Permanece en el interior con ventanas y puertas cerradas. Traslada todas las actividades al interior o pospón hasta que mejore la calidad del aire. Usa purificadores de aire con filtros HEPA. Ten medicamentos de emergencia disponibles y prepárate para buscar atención médica si los síntomas empeoran. Considera usar mascarillas N95 si debes salir brevemente.",
+        "elderly": "Permanece en el interior y mantén los niveles de actividad bajos. Minimiza incluso la actividad física ligera. Consulta a tu médico si experimentas síntomas como aumento de la dificultad para respirar, dolor en el pecho, latidos cardíacos irregulares o fatiga extrema. Mantén las ventanas cerradas, usa aire acondicionado con filtros limpios y ejecuta purificadores de aire. Haz que alguien te revise regularmente.",
+        "children": "Evita toda actividad física al aire libre. Mantén a los niños en el interior con actividad mínima incluso dentro. Cancela todas las actividades escolares al aire libre, deportes y recreo. Vigila de cerca los síntomas que requieran atención médica: tos severa, sibilancias, respiración rápida, dolor en el pecho o labios azulados. Usa purificadores de aire en las habitaciones de los niños y mantén los inhaladores de rescate accesibles.",
+        "athletes": "Evita todo ejercicio al aire libre. Traslada todos los entrenamientos al interior usando gimnasios o equipo doméstico. Esto no es adecuado para ningún entrenamiento al aire libre - ni siquiera trotar ligeramente se recomienda. Enfócate en entrenamiento de fuerza interior, yoga o actividades de baja intensidad. Pospone competencias y carreras. Considera esto un día de descanso o entrenamiento ligero para permitir que tu cuerpo evite el estrés."
       },
       "hazardous": {
-        "general": "Advertencia de salud de condiciones de emergencia: es más probable que todos se vean afectados.",
-        "sensitive": "Permanece en el interior y mantén los niveles de actividad bajos. Sigue los protocolos de salud de emergencia.",
-        "elderly": "Permanece en el interior y mantén la actividad al mínimo. Busca atención médica si experimentas síntomas.",
-        "children": "Mantén a los niños en el interior con actividad mínima. Asegura una filtración de aire adecuada si está disponible.",
-        "athletes": "Evita todas las actividades al aire libre. Cancela o pospone entrenamientos y eventos al aire libre."
+        "general": "Advertencia de salud de condiciones de emergencia: Es probable que todos se vean afectados por efectos graves en la salud. Esto representa una emergencia de salud pública. La exposición puede causar dificultad respiratoria severa, problemas cardiovasculares y otros impactos graves en la salud. Todos deben permanecer en el interior y minimizar toda actividad.",
+        "sensitive": "Permanece en el interior y mantén los niveles de actividad al mínimo absoluto. Sigue los protocolos de salud de emergencia proporcionados por las autoridades locales. Evita toda exposición al aire libre, incluso salidas breves. Usa mascarillas respiradoras N95 o mejores si la evacuación es necesaria. Ten medicamentos de emergencia preparados y accesibles. Busca atención médica inmediata para síntomas graves como dificultad respiratoria severa, dolor en el pecho o confusión.",
+        "elderly": "Permanece en el interior y mantén la actividad al mínimo - descansa tanto como sea posible. Busca atención médica inmediata si experimentas síntomas como dificultad respiratoria severa, dolor en el pecho, mareos o fatiga extrema. Mantén todas las ventanas y puertas selladas. Usa purificadores de aire en configuración máxima. Haz que cuidadores te revisen frecuentemente. Mantén números de contacto de emergencia fácilmente disponibles.",
+        "children": "Mantén a los niños en el interior con actividad mínima. Todas las escuelas deberían estar cerradas. Asegura filtración de aire adecuada con purificadores HEPA funcionando continuamente. Sella ventanas y puertas con burletes si están disponibles. Vigila síntomas de emergencia que requieran atención médica inmediata: dificultad respiratoria severa, labios o uñas con tinte azul, ataques de tos severos, letargo extremo o confusión. Considera evacuación si las condiciones persisten.",
+        "athletes": "Evita todas las actividades al aire libre. Cancela o pospone todas las sesiones de entrenamiento, eventos y competencias al aire libre inmediatamente. Permanece en el interior con actividad física mínima - trata esto como un día de descanso obligatorio. No intentes entrenamientos de alta intensidad en interiores ya que incluso tasas de respiración elevadas en interiores pueden ser problemáticas si el aire exterior está infiltrándose. Enfócate en estiramientos ligeros, meditación o descanso completo hasta que las condiciones mejoren sustancialmente."
       }
     },
     "actions": {
-      "good": [
-        "Disfruta de actividades al aire libre",
-        "No se necesitan restricciones"
-      ],
-      "moderate": [
-        "Esté atento a los síntomas si eres sensible",
-        "Reduce el esfuerzo pesado prolongado si es necesario"
-      ],
-      "unhealthySensitive": [
-        "Los grupos sensibles deben reducir la actividad al aire libre",
-        "Toma más descansos durante las actividades al aire libre",
-        "Considera reprogramar actividades extenuantes"
-      ],
-      "unhealthy": [
-        "Todos deben reducir el esfuerzo al aire libre",
-        "Los grupos sensibles deben evitar actividades al aire libre",
-        "Cierra ventanas y usa filtración de aire"
-      ],
-      "veryUnhealthy": [
-        "Evita todas las actividades físicas al aire libre",
-        "Permanece en el interior con ventanas cerradas",
-        "Usa purificadores de aire si están disponibles",
-        "Sigue el consejo de tu médico sobre el uso de inhaladores de rescate"
-      ],
-      "hazardous": [
-        "Permanece en el interior en todo momento",
-        "Mantén los niveles de actividad al mínimo",
-        "Ejecuta purificadores de aire continuamente",
-        "Busca atención médica si experimentas síntomas",
-        "Sigue los protocolos de emergencia"
-      ]
+      "good": {
+        "general": [
+          "Disfruta de actividades al aire libre sin restricciones",
+          "Día perfecto para ejercicio, deportes y recreación",
+          "No se necesitan precauciones especiales",
+          "Excelente momento para reuniones y eventos al aire libre"
+        ],
+        "sensitive": [
+          "Seguro para participar en todas las actividades al aire libre",
+          "No necesitas medicación de rescate hoy",
+          "Condiciones excelentes para personas con condiciones respiratorias",
+          "Siéntete libre de hacer ejercicio al aire libre sin preocupaciones"
+        ],
+        "elderly": [
+          "Día perfecto para paseos y pasatiempos al aire libre",
+          "Seguro para todos los niveles de actividad física",
+          "Disfruta de jardinería, caminatas o actividades sociales al aire libre",
+          "Sin preocupaciones cardiovasculares o respiratorias hoy"
+        ],
+        "children": [
+          "Deja que los niños jueguen afuera libremente",
+          "Perfecto para deportes al aire libre y tiempo de parque",
+          "Sin límites de tiempo en actividades al aire libre",
+          "Gran día para actividades escolares y recreo al aire libre"
+        ],
+        "athletes": [
+          "Ideal para entrenamiento de alta intensidad y competencias",
+          "No necesitas ajustar intensidad o duración del entrenamiento",
+          "Perfecto para carrera de larga distancia y entrenamiento de resistencia",
+          "Condiciones óptimas para eventos atléticos al aire libre"
+        ]
+      },
+      "moderate": {
+        "general": [
+          "Disfruta de actividades al aire libre normalmente para la mayoría",
+          "Esté atento a síntomas inusuales durante esfuerzo prolongado",
+          "Mantente hidratado durante actividades al aire libre",
+          "Sin restricciones importantes para personas saludables"
+        ],
+        "sensitive": [
+          "Monitorea síntomas (tos, dificultad para respirar)",
+          "Mantén inhaladores de rescate accesibles si tienes asma",
+          "Toma descansos si experimentas alguna molestia",
+          "Considera actividades más ligeras si sientes síntomas"
+        ],
+        "elderly": [
+          "Continúa actividades normales pero toma descansos regulares",
+          "Esté atento a fatiga, molestia en el pecho o dificultad respiratoria",
+          "Mantente bien hidratado durante tiempo al aire libre",
+          "Consulta a tu médico si tienes preocupaciones"
+        ],
+        "children": [
+          "Limita juegos intensos al aire libre a 2-3 horas",
+          "Vigila tos excesiva o sibilancias",
+          "Haz que niños asmáticos tomen descansos más frecuentes",
+          "Lleva el juego al interior si aparecen síntomas"
+        ],
+        "athletes": [
+          "Reduce intensidad del entrenamiento en un 10-20%",
+          "Evita entrenar durante horas pico de contaminación (mediodía)",
+          "Monitorea molestias respiratorias durante intervalos",
+          "Permite recuperación ligeramente más larga entre esfuerzos intensos"
+        ]
+      },
+      "unhealthySensitive": {
+        "general": [
+          "La mayoría puede continuar actividades ligeras al aire libre",
+          "Evita esfuerzo extenuante prolongado al aire libre",
+          "Toma descansos frecuentes durante actividades al aire libre",
+          "Ve al interior si experimentas alguna molestia"
+        ],
+        "sensitive": [
+          "Limita tiempo al aire libre a máximo 30-60 minutos",
+          "Usa medicamentos prescritos según recomendación",
+          "Ve al interior inmediatamente si se desarrollan síntomas",
+          "Evita todas las actividades extenuantes al aire libre"
+        ],
+        "elderly": [
+          "Mantén salidas al exterior cortas (15-30 minutos)",
+          "Evita actividades extenuantes al aire libre",
+          "Cierra ventanas y usa aire acondicionado con filtros",
+          "Ten medicamentos fácilmente disponibles"
+        ],
+        "children": [
+          "Limita juegos al aire libre a menos de 1 hora",
+          "Cancela deportes al aire libre y reduce tiempo de recreo",
+          "Haz que niños asmáticos tengan inhaladores cerca",
+          "Programa tiempo al aire libre durante mañana temprano o tarde"
+        ],
+        "athletes": [
+          "Reduce intensidad de entrenamiento en un 30-50%",
+          "Traslada entrenamientos al interior si es posible",
+          "Entrena solo durante horas de mañana temprano si es al aire libre",
+          "Omite intervalos de alta intensidad y trabajo de velocidad"
+        ]
+      },
+      "unhealthy": {
+        "general": [
+          "Limita todas las actividades al aire libre solo a salidas esenciales",
+          "Mantén ventanas y puertas cerradas",
+          "Usa filtración de aire HEPA si está disponible",
+          "Evita esfuerzo al aire libre"
+        ],
+        "sensitive": [
+          "Permanece en el interior y evita todas las actividades al aire libre",
+          "Ten medicamentos de emergencia fácilmente accesibles",
+          "Usa purificadores de aire con filtros HEPA",
+          "Mantén salidas al exterior bajo 15 minutos si es absolutamente necesario"
+        ],
+        "elderly": [
+          "Permanece en el interior con actividad mínima",
+          "Sigue el consejo del médico sobre uso de medicamentos",
+          "Cierra todas las ventanas y usa aire acondicionado con filtros HEPA",
+          "Evita chimeneas y velas en interiores"
+        ],
+        "children": [
+          "Mantén a los niños en el interior con ventanas cerradas",
+          "Cancela todas las actividades y deportes al aire libre",
+          "Sin recreo o tiempo de juego al aire libre",
+          "Vigila tos persistente o dificultad para respirar"
+        ],
+        "athletes": [
+          "Cancela todas las sesiones de entrenamiento al aire libre",
+          "Traslada entrenamientos completamente al interior",
+          "Pospone competencias y carreras al aire libre",
+          "Enfócate en entrenamiento cruzado de baja intensidad en interior"
+        ]
+      },
+      "veryUnhealthy": {
+        "general": [
+          "Permanece en el interior con todas las ventanas y puertas cerradas",
+          "Ejecuta purificadores de aire continuamente",
+          "Cancela todos los planes y eventos al aire libre",
+          "Limita incluso la actividad física interior"
+        ],
+        "sensitive": [
+          "Permanece en el interior con actividad mínima",
+          "Ten medicamentos de emergencia preparados y accesibles",
+          "Usa múltiples purificadores de aire con filtros HEPA",
+          "Usa mascarilla N95 si debes salir brevemente"
+        ],
+        "elderly": [
+          "Quédate en casa y descansa tanto como sea posible",
+          "Haz que alguien te revise regularmente",
+          "Mantén números de contacto de emergencia fácilmente disponibles",
+          "Busca atención médica para cualquier síntoma que empeore"
+        ],
+        "children": [
+          "Mantén a los niños en el interior solo con actividades tranquilas",
+          "Ejecuta purificadores de aire en las habitaciones de los niños",
+          "Cancela todas las actividades escolares al aire libre",
+          "Vigila de cerca tos severa o dificultad para respirar"
+        ],
+        "athletes": [
+          "Trata esto como un día de descanso obligatorio",
+          "No hagas ejercicio al aire libre bajo ninguna circunstancia",
+          "Pospone todas las competencias y eventos",
+          "Enfócate en estiramientos, rodillo de espuma o descanso completo"
+        ]
+      },
+      "hazardous": {
+        "general": [
+          "Esta es una emergencia - permanece en el interior en todo momento",
+          "Sella ventanas y puertas para prevenir infiltración de aire",
+          "Ejecuta múltiples purificadores de aire continuamente",
+          "Sigue protocolos de emergencia de las autoridades locales"
+        ],
+        "sensitive": [
+          "Mantén actividad al mínimo absoluto incluso en interiores",
+          "Ten plan médico de emergencia listo",
+          "Usa mascarillas N95 o P100 si la evacuación es necesaria",
+          "Busca atención médica inmediata para síntomas graves"
+        ],
+        "elderly": [
+          "Descansa completamente y minimiza todo movimiento",
+          "Haz que cuidadores te monitoreen frecuentemente",
+          "Mantén servicios de emergencia en marcación rápida",
+          "Prepara suministros de evacuación si las condiciones empeoran"
+        ],
+        "children": [
+          "Mantén a los niños en habitaciones con mejor filtración de aire",
+          "Todas las escuelas deben estar cerradas",
+          "Vigila labios con tinte azul o letargo extremo",
+          "Ten plan de evacuación listo si es necesario"
+        ],
+        "athletes": [
+          "Descanso completo - sin entrenamiento de ningún tipo",
+          "No hagas ejercicio ni siquiera en interiores",
+          "Cancela y pospone todos los eventos atléticos inmediatamente",
+          "Enfócate en meditación y recuperación mental solamente"
+        ]
+      }
     }
   },
   "footer": {

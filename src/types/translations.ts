@@ -258,12 +258,48 @@ export interface Dictionary {
       };
     };
     actions: {
-      good: string[];
-      moderate: string[];
-      unhealthySensitive: string[];
-      unhealthy: string[];
-      veryUnhealthy: string[];
-      hazardous: string[];
+      good: {
+        general: string[];
+        sensitive: string[];
+        elderly: string[];
+        children: string[];
+        athletes: string[];
+      };
+      moderate: {
+        general: string[];
+        sensitive: string[];
+        elderly: string[];
+        children: string[];
+        athletes: string[];
+      };
+      unhealthySensitive: {
+        general: string[];
+        sensitive: string[];
+        elderly: string[];
+        children: string[];
+        athletes: string[];
+      };
+      unhealthy: {
+        general: string[];
+        sensitive: string[];
+        elderly: string[];
+        children: string[];
+        athletes: string[];
+      };
+      veryUnhealthy: {
+        general: string[];
+        sensitive: string[];
+        elderly: string[];
+        children: string[];
+        athletes: string[];
+      };
+      hazardous: {
+        general: string[];
+        sensitive: string[];
+        elderly: string[];
+        children: string[];
+        athletes: string[];
+      };
     };
   };
   footer: {
