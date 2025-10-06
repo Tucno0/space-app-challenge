@@ -28,7 +28,7 @@ export default function ForecastPage() {
   const { dictionary: dict } = useTranslation();
   const trpc = useTRPC();
 
-  // Fetch weather forecast from ICA Predict API (Ayacucho only)
+  // Fetch weather forecast from IQA Predict API (Ayacucho only)
   const forecastQuery = useQuery(trpc.weather.getForecast.queryOptions());
 
   // Show loading state
@@ -78,7 +78,7 @@ export default function ForecastPage() {
         <Info className="h-4 w-4" />
         <AlertTitle>Note</AlertTitle>
         <AlertDescription>
-          This forecast is specifically for Ayacucho, Peru, powered by ICA
+          This forecast is specifically for Ayacucho, Peru, powered by IQA
           Predict AI prediction model.
         </AlertDescription>
       </Alert>
@@ -164,7 +164,7 @@ export default function ForecastPage() {
           <div>
             <h4 className="font-semibold mb-2">Data Source</h4>
             <p className="text-sm text-muted-foreground">
-              Weather forecasts are provided by the ICA Predict API, using
+              Weather forecasts are provided by the IQA Predict API, using
               advanced machine learning models trained on historical weather
               patterns specific to Ayacucho, Peru.
             </p>

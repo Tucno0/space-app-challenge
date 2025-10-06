@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "ICA Predict",
+    "appName": "IQA Predict",
     "loading": "Loading...",
     "error": "Error",
     "save": "Save",
@@ -97,7 +97,7 @@
   },
   "sources": {
     "title": "Data Sources",
-    "subtitle": "Learn about the scientific instruments and networks that power ICA Predict",
+    "subtitle": "Learn about the scientific instruments and networks that power IQA Predict",
     "primarySource": "Primary Data Source",
     "coverage": "Coverage",
     "greaterNorthAmerica": "Greater North America",
@@ -118,7 +118,7 @@
     "visitWebsite": "Visit Website",
     "methodology": "Data Processing & Methodology",
     "dataIntegration": "Data Integration",
-    "dataIntegrationText": "ICA Predict combines satellite observations from NASA TEMPO with ground-based measurements from Pandora, TolNet, and OpenAQ networks to provide comprehensive air quality assessments.",
+    "dataIntegrationText": "IQA Predict combines satellite observations from NASA TEMPO with ground-based measurements from Pandora, TolNet, and OpenAQ networks to provide comprehensive air quality assessments.",
     "qualityAssurance": "Quality Assurance",
     "qualityAssuranceText": "All data undergoes rigorous quality control procedures. Satellite retrievals are validated against ground-based measurements to ensure accuracy. Data quality flags are applied to all observations.",
     "aqiCalculation": "AQI Calculation",
@@ -126,7 +126,7 @@
     "forecastModels": "Forecast Models",
     "forecastModelsText": "Forecasts are generated using historical data patterns, current observations, and meteorological forecasts. Machine learning models help predict pollution transport and dispersion.",
     "attribution": "Data Attribution & Licensing",
-    "attributionText": "All data sources used in ICA Predict are publicly available and open access. We acknowledge:",
+    "attributionText": "All data sources used in IQA Predict are publicly available and open access. We acknowledge:",
     "attributionList": {
       "tempo": "NASA TEMPO mission and the Atmospheric Science Data Center",
       "pandora": "NASA Pandora Project at Goddard Space Flight Center",
@@ -168,7 +168,7 @@
     "clearDataDescription": "Remove all locally stored data from this browser",
     "clearAllData": "Clear All Data",
     "privacy": "Privacy",
-    "privacyText": "ICA Predict respects your privacy. We only collect data necessary to provide air quality information. Location data is only used when you explicitly request it and is not stored on our servers.",
+    "privacyText": "IQA Predict respects your privacy. We only collect data necessary to provide air quality information. Location data is only used when you explicitly request it and is not stored on our servers.",
     "units": "Units",
     "metric": "Metric",
     "imperial": "Imperial",
@@ -288,7 +288,7 @@
     }
   },
   "footer": {
-    "about": "About ICA Predict",
+    "about": "About IQA Predict",
     "aboutText": "Real-time air quality monitoring powered by NASA's TEMPO satellite and ground station networks.",
     "dataSources": "Data Sources",
     "quickLinks": "Quick Links",
@@ -300,7 +300,7 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "spaceApps": "NASA Space Apps",
-    "copyright": "ICA Predict. Built for NASA Space Apps Challenge 2025.",
+    "copyright": "IQA Predict. Built for NASA Space Apps Challenge 2025.",
     "dataProvided": "Data provided by NASA TEMPO, Pandora, OpenAQ, and other public sources."
   },
   "errors": {
@@ -312,27 +312,27 @@
   },
   "metadata": {
     "home": {
-      "title": "ICA Predict - Real-Time Air Quality Monitoring",
+      "title": "IQA Predict - Real-Time Air Quality Monitoring",
       "description": "Monitor air quality in real-time with data from NASA TEMPO satellite, Pandora, and OpenAQ networks. Get personalized alerts and forecasts."
     },
     "forecast": {
-      "title": "Air Quality Forecast - ICA Predict",
+      "title": "Air Quality Forecast - IQA Predict",
       "description": "7-day air quality forecast with hourly details powered by NASA satellite data and ground stations."
     },
     "alerts": {
-      "title": "Air Quality Alerts - ICA Predict",
+      "title": "Air Quality Alerts - IQA Predict",
       "description": "Configure personalized air quality alerts and notifications for your location."
     },
     "map": {
-      "title": "Interactive Air Quality Map - ICA Predict",
+      "title": "Interactive Air Quality Map - IQA Predict",
       "description": "Real-time interactive map showing air quality across North America with NASA TEMPO data."
     },
     "sources": {
-      "title": "Data Sources - ICA Predict",
-      "description": "Learn about NASA TEMPO, Pandora, and other data sources powering ICA Predict air quality monitoring."
+      "title": "Data Sources - IQA Predict",
+      "description": "Learn about NASA TEMPO, Pandora, and other data sources powering IQA Predict air quality monitoring."
     },
     "settings": {
-      "title": "Settings - ICA Predict",
+      "title": "Settings - IQA Predict",
       "description": "Manage your preferences, locations, and account settings for personalized air quality monitoring."
     }
   }

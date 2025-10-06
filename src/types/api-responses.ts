@@ -106,7 +106,7 @@ export interface OpenWeatherOneCallResponse {
   };
 }
 
-// ICA Predict API Response Types (Our own forecast API)
+// IQA Predict API Response Types (Our own forecast API)
 export interface ICAPredictForecastItem {
   date: string; // Format: "YYYY-MM-DD"
   temperature_celsius: number;

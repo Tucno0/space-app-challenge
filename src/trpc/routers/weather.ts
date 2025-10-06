@@ -124,12 +124,12 @@ export const weatherRouter = createTRPCRouter({
       }
     }),
 
-  // Get weather forecast from ICA Predict API (Ayacucho only)
+  // Get weather forecast from IQA Predict API (Ayacucho only)
   getForecast: baseProcedure.query(async () => {
     if (!ICA_PREDICT_API_URL) {
       throw new TRPCError({
         code: 'INTERNAL_SERVER_ERROR',
-        message: 'ICA Predict API URL not configured',
+        message: 'IQA Predict API URL not configured',
       });
     }
 
@@ -147,7 +147,7 @@ export const weatherRouter = createTRPCRouter({
       if (!response.ok) {
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: `ICA Predict API error: ${response.status} ${response.statusText}`,
+          message: `IQA Predict API error: ${response.status} ${response.statusText}`,
         });
       }
 
@@ -161,7 +161,7 @@ export const weatherRouter = createTRPCRouter({
       }
 
       console.log(
-        `Successfully fetched ${data.length} days of forecast from ICA Predict API`
+        `Successfully fetched ${data.length} days of forecast from IQA Predict API`
       );
 
       // Transform the data to include proper types and structure
